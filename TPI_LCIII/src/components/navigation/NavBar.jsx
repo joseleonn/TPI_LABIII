@@ -1,10 +1,24 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/Credentials";
+
 const NavBar = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log(user);
+      })
+      .catch((error) => {
+        // An error happened.
+      });
   };
 
   return (
@@ -62,22 +76,32 @@ const NavBar = () => {
               </nav>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 hidden md:block">
               <div className="sm:flex sm:gap-4">
-                <a
+                <Link
                   className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                  href="/"
+                  to="/"
                 >
                   Login
-                </a>
+                </Link>
 
                 <div className="hidden sm:flex">
-                  <a
+                  <Link
                     className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-                    href="/"
+                    to="/register"
                   >
                     Register
-                  </a>
+                  </Link>
+                </div>
+
+                <div className="hidden sm:flex">
+                  <Link
+                    onChange={handleLogOut}
+                    className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white"
+                    to="/"
+                  >
+                    Cerrar Sesion
+                  </Link>
                 </div>
               </div>
             </div>
@@ -110,7 +134,7 @@ const NavBar = () => {
         <div
           className={` transition-transform ${
             showMenu ? "transform translate-x-0" : "transform translate-x-full"
-          } md:hidden ml-auto max-w-xs z-10 `}
+          } md:hidden ml-auto max-w-xs z-10 fixed inset-0 mt-16`}
         >
           <ul className="flex flex-col items-end gap-6 text-md mx-8 ml-44 bg-teal-600 rounded p-2">
             <li className="">
