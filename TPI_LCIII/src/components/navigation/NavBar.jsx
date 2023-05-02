@@ -1,26 +1,19 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase/Credentials";
+import { useEffect, useState } from "react";
+import "firebase/auth";
+import { UserAuth } from "../../context/AuthContext";
 
 const NavBar = () => {
   const [showMenu, setShowMenu] = useState(false);
-
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
-  const handleLogOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        console.log(user);
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  };
+  const { user, handleLogOut } = UserAuth();
 
+  const logout = async () => {
+    handleLogOut();
+  };
   return (
     <div>
       <header aria-label="Site Header" className="bg-white">
@@ -77,33 +70,35 @@ const NavBar = () => {
             </div>
 
             <div className="flex items-center gap-4 hidden md:block">
-              <div className="sm:flex sm:gap-4">
-                <Link
-                  className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                  to="/"
-                >
-                  Login
-                </Link>
-
-                <div className="hidden sm:flex">
+              {user ? (
+                <div className="sm:flex sm:gap-4">
                   <Link
-                    className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-                    to="/register"
-                  >
-                    Register
-                  </Link>
-                </div>
-
-                <div className="hidden sm:flex">
-                  <Link
-                    onChange={handleLogOut}
-                    className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white"
+                    className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
                     to="/"
+                    onClick={logout}
                   >
                     Cerrar Sesion
                   </Link>
                 </div>
-              </div>
+              ) : (
+                <div className="sm:flex sm:gap-4">
+                  <Link
+                    className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+
+                  <div className="hidden sm:flex">
+                    <Link
+                      className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
+                      to="/register"
+                    >
+                      Register
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="block md:hidden">
