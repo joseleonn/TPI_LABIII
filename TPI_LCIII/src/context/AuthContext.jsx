@@ -1,17 +1,14 @@
 import {
   signOut,
-  EmailAuthProvider,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   getAuth,
 } from "firebase/auth";
 import { auth } from "../firebase/Credentials";
-import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState, createContext } from "react";
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  // const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const handleSingIn = async (email, password) => {
     const auth = getAuth();

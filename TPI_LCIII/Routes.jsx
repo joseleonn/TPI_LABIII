@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useLocation,
   BrowserRouter,
 } from "react-router-dom";
 import Error404 from "./src/hocs/Errors/Error404";
