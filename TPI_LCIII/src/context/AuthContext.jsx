@@ -10,6 +10,7 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
   const handleSingIn = async (email, password) => {
     const auth = getAuth();
     const { user } = signInWithEmailAndPassword(auth, email, password)

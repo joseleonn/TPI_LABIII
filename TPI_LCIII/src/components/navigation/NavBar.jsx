@@ -26,10 +26,10 @@ const NavBar = () => {
   };
   return (
     <div>
-      <header aria-label="Site Header" className="bg-red">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8   ">
-          <div className="flex h-16 items-center justify-between fixed inset-0 z-10 bg-white ">
-            <div className="md:flex md:items-center md:gap-12">
+      <header aria-label="Site Header" className="bg-transparent">
+        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8  ">
+          <div className="flex h-16 items-center justify-between fixed inset-0 z-10 bg-transparent shadow-md shadow-offset-y-4 ">
+            <div className="md:flex md:items-center md:gap-12 p-8">
               <a className="block text-teal-600" href="/">
                 <span className="sr-only">Home</span>
                 <svg
@@ -48,10 +48,10 @@ const NavBar = () => {
 
             <div className="hidden md:block">
               <nav aria-label="Site Nav">
-                <ul className="flex items-center gap-8 text-sm mx-8">
+                <ul className="flex items-center gap-8 text-l mx-8">
                   <li>
                     <Link
-                      className="text-gray-500 transition hover:text-gray-500/75"
+                      className="text-white transition hover:text-gray-500/75"
                       to="/"
                     >
                       Inicio
@@ -60,7 +60,7 @@ const NavBar = () => {
 
                   <li>
                     <Link
-                      className="text-gray-500 transition hover:text-gray-500/75"
+                      className="text-white transition hover:text-gray-500/75"
                       to="/productos"
                     >
                       Productos
@@ -69,7 +69,7 @@ const NavBar = () => {
 
                   <li>
                     <Link
-                      className="text-gray-500 transition hover:text-gray-500/75"
+                      className="text-white transition hover:text-gray-500/75"
                       to="/nosotros"
                     >
                       Nosotros
@@ -81,18 +81,18 @@ const NavBar = () => {
 
             {/* If Login */}
 
-            <div className="flex items-center gap-4 hidden md:block">
+            <div className="flex items-center gap-4 hidden md:block p-8">
               {user ? (
                 <div className="sm:flex sm:gap-4">
                   <div>
                     <UserModal />
                   </div>
                   <Link
-                    className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                    className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow hover:text-red-900"
                     to="/"
                     onClick={(e) => setOpen(true)}
                   >
-                    Cerrar Sesion
+                    <ArrowLeftOnRectangleIcon className="h-8 w-8" />
                   </Link>
                 </div>
               ) : (
@@ -120,14 +120,14 @@ const NavBar = () => {
             <div className="block md:hidden">
               <button
                 onClick={toggleMenu}
-                className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+                className="rounded bg-transparent p-4 text-gray-600 transition mr-4 focus:outline-none "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  stroke="white"
                   strokeWidth="2"
                 >
                   <path
@@ -147,8 +147,8 @@ const NavBar = () => {
             showMenu ? "transform translate-x-0" : "transform translate-x-full"
           } md:hidden ml-auto max-w-max z-10 fixed inset-0 mt-16`}
         >
-          <ul className="flex flex-col items-start gap-6 text-md mx-8 ml-44 bg-teal-600 rounded p-2 ">
-            <li className="">
+          <ul className="flex flex-col items-start gap-6 text-md mx-8 ml-44 bg-gray-700 rounded p-2 ">
+            <li className="p-2">
               <Link
                 className=" text-white transition hover:text-gray-500/75  ml-4"
                 to="/"
@@ -157,7 +157,7 @@ const NavBar = () => {
               </Link>
             </li>
 
-            <li>
+            <li className="p-2">
               <Link
                 className=" text-white transition hover:text-gray-500/75 ml-4"
                 to="/productos"
@@ -166,7 +166,7 @@ const NavBar = () => {
               </Link>
             </li>
 
-            <li>
+            <li className="p-2">
               <Link
                 className=" text-white transition hover:text-gray-500/75  ml-4"
                 to="/nosotros"
@@ -177,34 +177,45 @@ const NavBar = () => {
 
             {user ? (
               <ul className="">
-                <li className="">
+                <li className="p-2">
                   <UserModalMovil />
                 </li>
 
-                <li>
+                <li className="p-2">
                   <button
                     type="button"
                     className="inline-flex justify-center rounded-md m-1 border border-transparent bg-red-600 px-4 py-2 text-base  text-white shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xs:text-xs"
-                    onClick={logout}
+                    onClick={(e) => setOpen(true)}
                   >
                     Cerrar Sesion
                   </button>
                 </li>
               </ul>
             ) : (
-              <li>
-                <Link
-                  className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                  to="/login"
-                >
-                  Login
-                </Link>
-              </li>
+              <ul className="">
+                <li className="p-2">
+                  <Link
+                    className="text-white transition hover:text-gray-500/75 ml-4"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                </li>
+
+                <li className="mt-4 p-2">
+                  <Link
+                    className="text-white transition hover:text-gray-500/75 ml-4 mt-6"
+                    to="/register"
+                  >
+                    Register
+                  </Link>
+                </li>
+              </ul>
             )}
           </ul>
         </div>
       </header>
-      {/* modal */}
+      {/* modal logout */}
 
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -221,7 +232,7 @@ const NavBar = () => {
           </Transition.Child>
 
           <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -231,7 +242,7 @@ const NavBar = () => {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-gray-700 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                   <div>
                     <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
                       <ArrowLeftOnRectangleIcon
@@ -242,7 +253,7 @@ const NavBar = () => {
                     <div className="mt-3 text-center sm:mt-5">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg font-medium leading-6 text-gray-900"
+                        className="text-lg font-medium leading-6 text-white"
                       >
                         Seguro quieres salir?
                       </Dialog.Title>
@@ -251,14 +262,14 @@ const NavBar = () => {
                   <div className="mt-5 sm:mt-6 flex items-center justify-center">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md m-1 border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+                      className="inline-flex justify-center rounded-md m-1 border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none sm:text-sm"
                       onClick={logout}
                     >
                       Cerrar Sesion
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border m-1 border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+                      className="inline-flex justify-center rounded-md border m-1 border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none sm:text-sm"
                       onClick={(e) => setOpen(false)}
                     >
                       Cancelar

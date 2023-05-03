@@ -19,9 +19,12 @@ const UserModal = () => {
 
   return (
     <div>
-      <div>
-        <button onClick={(e) => setOpen(true)}>
-          <UserCircleIcon className="h-6 w-6 text-gray-600" />
+      <div className="">
+        <button
+          className="bg-transparent border-none focus:outline-none"
+          onClick={(e) => setOpen(true)}
+        >
+          <UserCircleIcon className="h-8 w-8 text-white hover:text-gray-300" />
         </button>
       </div>
       <Transition.Root show={open} as={Fragment}>
@@ -49,7 +52,7 @@ const UserModal = () => {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-gray-800 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                   <div>
                     <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
                       <UserCircleIcon
@@ -60,12 +63,12 @@ const UserModal = () => {
                     <div className="mt-3 text-center sm:mt-5">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg font-medium leading-6 text-gray-900"
+                        className="text-lg font-medium leading-6 text-white"
                       >
                         Mi cuenta
                       </Dialog.Title>
 
-                      <ul>
+                      <ul className="text-white">
                         <li>{user.email}</li>
                       </ul>
                     </div>
@@ -73,7 +76,7 @@ const UserModal = () => {
                   <div className="mt-5 sm:mt-6 flex items-center justify-center">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border m-1 border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+                      className="inline-flex justify-center rounded-md border m-1 border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none sm:text-sm"
                       onClick={(e) => setOpen(false)}
                     >
                       Cancelar

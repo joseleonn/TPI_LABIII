@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer aria-label="Site Footer" className="bg-gray-100">
+    <footer aria-label="Site Footer" className="bg-transparent">
       <div className="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-24">
         <div className="absolute end-4 top-4 sm:end-6 sm:top-6 lg:end-8 lg:top-8">
           <Link
@@ -78,9 +78,9 @@ const Footer = () => {
               </svg>
             </div>
 
-            <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500 lg:text-left">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
-              consequuntur amet culpa cum itaque neque.
+            <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-300 lg:text-left">
+              Somos una marca de ropa emergente enfocada en brindar calidad y un
+              estilo unico.
             </p>
           </div>
 
@@ -88,7 +88,7 @@ const Footer = () => {
             <ul className="flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end lg:gap-12">
               <li>
                 <Link
-                  className="text-gray-700 transition hover:text-gray-700/75"
+                  className="text-white transition hover:text-gray-700/75"
                   to="/"
                 >
                   Inicio
@@ -97,7 +97,7 @@ const Footer = () => {
 
               <li>
                 <Link
-                  className="text-gray-700 transition hover:text-gray-700/75"
+                  className="text-white transition hover:text-gray-700/75"
                   to="/productos"
                 >
                   Productos
@@ -106,7 +106,7 @@ const Footer = () => {
 
               <li>
                 <Link
-                  className="text-gray-700 transition hover:text-gray-700/75"
+                  className="text-white transition hover:text-gray-700/75"
                   to="/nosotros"
                 >
                   Nosotros
