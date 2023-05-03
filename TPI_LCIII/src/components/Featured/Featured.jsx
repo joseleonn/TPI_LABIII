@@ -1,6 +1,6 @@
 const Featured = () => {
   return (
-    <div className="-mt-10">
+    <div className="mt-4 sm: mt-6">
       <section>
         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <header className="text-center">

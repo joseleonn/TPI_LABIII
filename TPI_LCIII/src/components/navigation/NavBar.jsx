@@ -7,6 +7,8 @@ import {
   CheckIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
+import UserModal from "./UserModal";
+import UserModalMovil from "./UserModalMovil";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -24,9 +26,9 @@ const NavBar = () => {
   };
   return (
     <div>
-      <header aria-label="Site Header" className="bg-white">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
-          <div className="flex h-16 items-center justify-between">
+      <header aria-label="Site Header" className="bg-red">
+        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8   ">
+          <div className="flex h-16 items-center justify-between fixed inset-0 z-10 bg-white ">
             <div className="md:flex md:items-center md:gap-12">
               <a className="block text-teal-600" href="/">
                 <span className="sr-only">Home</span>
@@ -77,9 +79,14 @@ const NavBar = () => {
               </nav>
             </div>
 
+            {/* If Login */}
+
             <div className="flex items-center gap-4 hidden md:block">
               {user ? (
                 <div className="sm:flex sm:gap-4">
+                  <div>
+                    <UserModal />
+                  </div>
                   <Link
                     className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
                     to="/"
@@ -89,6 +96,7 @@ const NavBar = () => {
                   </Link>
                 </div>
               ) : (
+                // IF NOT LOGIN
                 <div className="sm:flex sm:gap-4">
                   <Link
                     className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
@@ -137,12 +145,12 @@ const NavBar = () => {
         <div
           className={` transition-transform ${
             showMenu ? "transform translate-x-0" : "transform translate-x-full"
-          } md:hidden ml-auto max-w-xs z-10 fixed inset-0 mt-16`}
+          } md:hidden ml-auto max-w-max z-10 fixed inset-0 mt-16`}
         >
-          <ul className="flex flex-col items-end gap-6 text-md mx-8 ml-44 bg-teal-600 rounded p-2">
+          <ul className="flex flex-col items-start gap-6 text-md mx-8 ml-44 bg-teal-600 rounded p-2 ">
             <li className="">
               <Link
-                className=" text-white transition hover:text-gray-500/75 mr-3 "
+                className=" text-white transition hover:text-gray-500/75  ml-4"
                 to="/"
               >
                 Inicio
@@ -151,7 +159,7 @@ const NavBar = () => {
 
             <li>
               <Link
-                className=" text-white transition hover:text-gray-500/75 mr-3"
+                className=" text-white transition hover:text-gray-500/75 ml-4"
                 to="/productos"
               >
                 Productos
@@ -160,12 +168,39 @@ const NavBar = () => {
 
             <li>
               <Link
-                className=" text-white transition hover:text-gray-500/75 mr-3"
+                className=" text-white transition hover:text-gray-500/75  ml-4"
                 to="/nosotros"
               >
                 Nosotros
               </Link>
             </li>
+
+            {user ? (
+              <ul className="">
+                <li className="">
+                  <UserModalMovil />
+                </li>
+
+                <li>
+                  <button
+                    type="button"
+                    className="inline-flex justify-center rounded-md m-1 border border-transparent bg-red-600 px-4 py-2 text-base  text-white shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xs:text-xs"
+                    onClick={logout}
+                  >
+                    Cerrar Sesion
+                  </button>
+                </li>
+              </ul>
+            ) : (
+              <li>
+                <Link
+                  className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                  to="/login"
+                >
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </header>
