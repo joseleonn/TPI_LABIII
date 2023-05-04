@@ -28,7 +28,7 @@ const NavBar = () => {
     <div>
       <header aria-label="Site Header" className="bg-transparent">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8  ">
-          <div className="flex h-16 items-center justify-between fixed inset-0 z-10 bg-transparent shadow-md shadow-offset-y-4 ">
+          <div className="flex h-16 items-center justify-between fixed inset-0 z-10 bg-transparent   ">
             <div className="md:flex md:items-center md:gap-12 p-8">
               <a className="block text-teal-600" href="/">
                 <span className="sr-only">Home</span>
