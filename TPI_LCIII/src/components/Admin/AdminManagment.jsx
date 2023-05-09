@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore";
 import app from "../../firebase/Credentials";
 import { useState } from "react";
+import NavBar from "../navigation/NavBar";
 
 const AdminManagment = () => {
   const { user } = UserAuth();
@@ -62,6 +63,7 @@ const AdminManagment = () => {
 
   return (
     <div>
+      <NavBar />
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg text-center">
           <h1 className="text-2xl font-bold text-white sm:text-3xl">
@@ -144,12 +146,13 @@ const AdminManagment = () => {
             >
               Agregar
             </button>
-
-            <button>
-              <Link to="/admin">Vovler</Link>
-            </button>
           </div>
         </form>
+        <div className=" flex justify-center -mt-11 -ml-36">
+          <button className="px-5 py-3 inline-block rounded-lg text-sm">
+            <Link to="/admin">Vovler</Link>
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -27,9 +27,9 @@ const NavBar = () => {
   return (
     <div>
       <header aria-label="Site Header" className="bg-transparent">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8  ">
+        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
           <div className="flex h-16 items-center justify-between fixed inset-0 z-10 bg-transparent   ">
-            <div className="md:flex md:items-center md:gap-12 p-8">
+            <div className="md:flex md:items-center md:gap-12 p-8 ">
               <a className="block text-teal-600" href="/">
                 <span className="sr-only">Home</span>
                 <svg
@@ -46,9 +46,9 @@ const NavBar = () => {
               </a>
             </div>
 
-            <div className="hidden md:block">
+            <div className="hidden md:block ml-44">
               <nav aria-label="Site Nav">
-                <ul className="flex items-center gap-8 text-l mx-8">
+                <ul className="flex items-center gap-12 text-xl ">
                   <li>
                     <Link
                       className="text-white transition hover:text-gray-500/75"

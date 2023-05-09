@@ -21,14 +21,14 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="flex h-screen">
-      <section className="flex justify-center content-center ">
-        <div className="lg:grid lg:min-h-screen lg:grid-cols-12 ">
+    <div className="flex justify-center items-center h-screen">
+      <section className=" ">
+        <div className="">
           <main
             aria-label="Main"
-            className="  px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6 "
+            className="  px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-  "
           >
-            <div className="max-w-xl lg:max-w-3xl bg-gray-600 bg-opacity-50 p-10 rounded-3xl mt-12 ">
+            <div className=" max-w-xl lg:max-w-3xl bg-gray-600 bg-opacity-50 p-10 rounded-3xl mt-14 ">
               <div className="relative  block ">
                 <h1 className=" text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl flex justify-center">
                   <UserCircleIcon
