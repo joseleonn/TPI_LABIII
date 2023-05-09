@@ -20,6 +20,9 @@ const NavBar = () => {
 
   const { user, handleLogOut } = UserAuth();
 
+  if (!user) {
+    return <div>Cargando...</div>; // Muestra un indicador de carga o mensaje de espera mientras se obtiene el usuario
+  }
   const logout = async () => {
     handleLogOut();
     setOpen(false);
@@ -75,6 +78,17 @@ const NavBar = () => {
                       Nosotros
                     </Link>
                   </li>
+
+                  {user.rol === "Admin" ? (
+                    <li>
+                      <Link
+                        className="text-white transition hover:text-gray-500/75"
+                        to="/admin"
+                      >
+                        Administrador
+                      </Link>
+                    </li>
+                  ) : null}
                 </ul>
               </nav>
             </div>
@@ -89,7 +103,6 @@ const NavBar = () => {
                   </div>
                   <Link
                     className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow hover:text-red-900"
-                    to="/"
                     onClick={(e) => setOpen(true)}
                   >
                     <ArrowLeftOnRectangleIcon className="h-8 w-8" />
@@ -175,6 +188,19 @@ const NavBar = () => {
               </Link>
             </li>
 
+            {/* IF ADMIN */}
+            {user.rol === "Admin" ? (
+              <li>
+                <Link
+                  className="text-white transition hover:text-gray-500/75  ml-5"
+                  to="/admin"
+                >
+                  Administrador
+                </Link>
+              </li>
+            ) : null}
+
+            {/* IF CLIENT */}
             {user ? (
               <ul className="">
                 <li className="p-2">
@@ -184,7 +210,7 @@ const NavBar = () => {
                 <li className="p-2">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md m-1 border border-transparent bg-red-600 px-4 py-2 text-base  text-white shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xs:text-xs"
+                    className="inline-flex justify-center rounded-md  border border-transparent bg-red-600 px-4 py-2 text-base  text-white shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xs:text-xs"
                     onClick={(e) => setOpen(true)}
                   >
                     Cerrar Sesion
@@ -260,13 +286,14 @@ const NavBar = () => {
                     </div>
                   </div>
                   <div className="mt-5 sm:mt-6 flex items-center justify-center">
-                    <button
+                    <Link
+                      to="/"
                       type="button"
                       className="inline-flex justify-center rounded-md m-1 border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none sm:text-sm"
                       onClick={logout}
                     >
                       Cerrar Sesion
-                    </button>
+                    </Link>
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border m-1 border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none sm:text-sm"

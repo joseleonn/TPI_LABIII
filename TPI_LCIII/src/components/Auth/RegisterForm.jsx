@@ -3,23 +3,30 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebase/Credentials";
+import app, { auth } from "../../firebase/Credentials";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+
+const firestore = getFirestore(app);
 const RegisterFormFire = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rol, setRol] = useState("Cliente");
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password, rol)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+
+        // Agrega al usuario a la BASE DE DATOS y le asigna el rol
+        const docuRef = doc(firestore, `Usuarios/${user.uid}`);
+        setDoc(docuRef, { correo: email, rol: rol });
         // ...
         navigate("/");
-        console.log(user);
       })
       .catch((error) => {
         alert(error.message);

@@ -1,15 +1,30 @@
+// CREAMOS EL CONTEXT PARA PROVEER LA INFORMACION DEL USUARIO A TODA LA APP
+
 import {
   signOut,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   getAuth,
 } from "firebase/auth";
-import { auth } from "../firebase/Credentials";
+import app, { auth } from "../firebase/Credentials";
 import { useContext, useEffect, useState, createContext } from "react";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+
 const AuthContext = createContext();
+const firestore = getFirestore(app);
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  // FUNCION PARA OBTENER EL ROL Y PODER PASARLO A TODA LA APP JUNTO CON LOS DATOS DEL USER
+  async function getRol(uid) {
+    const docuRef = doc(firestore, `Usuarios/${uid}`);
+    const docuCifrada = await getDoc(docuRef);
+
+    const infoFinal = docuCifrada.data().rol;
+
+    return infoFinal;
+  }
 
   const handleSingIn = async (email, password) => {
     const auth = getAuth();
@@ -33,21 +48,26 @@ export const AuthContextProvider = ({ children }) => {
       console.log(error);
     }
   };
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     // User is signed in, see docs for a list of available properties
-  //     // https://firebase.google.com/docs/reference/js/firebase.User
-  //     const uid = user.uid;
-  //     // ...
-  //   } else {
-  //     // User is signed out
-  //     // ...
-  //   }
-  // });
-  //Read if you are logged in or not
+
+  function setUserWithFirebaseAndRol(user) {
+    getRol(user.uid).then((rol) => {
+      const userData = {
+        uid: user.id,
+        email: user.email,
+        rol: rol,
+      };
+      setUser(userData);
+      console.log(userData);
+    });
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      if (user) {
+        setUserWithFirebaseAndRol(user);
+      } else {
+        setUser(null);
+      }
     });
     return () => {
       unsubscribe();

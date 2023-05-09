@@ -21,7 +21,7 @@ const UserModal = () => {
     <div>
       <div>
         <button
-          className="bg-transparent text-white border-none focus:outline-none -mt-1  "
+          className="bg-transparent text-white border-none focus:outline-none -mt-3 -ml-1 "
           onClick={(e) => setOpen(true)}
         >
           <p className="hover:text-gray-500/75">Mi Cuenta</p>
