@@ -20,9 +20,6 @@ const NavBar = () => {
 
   const { user, handleLogOut } = UserAuth();
 
-  if (!user) {
-    return <div>Cargando...</div>; // Muestra un indicador de carga o mensaje de espera mientras se obtiene el usuario
-  }
   const logout = async () => {
     handleLogOut();
     setOpen(false);
@@ -78,8 +75,7 @@ const NavBar = () => {
                       Nosotros
                     </Link>
                   </li>
-
-                  {user.rol === "Admin" ? (
+                  {user && user.rol === "Admin" ? (
                     <li>
                       <Link
                         className="text-white transition hover:text-gray-500/75"
@@ -112,7 +108,7 @@ const NavBar = () => {
                 // IF NOT LOGIN
                 <div className="sm:flex sm:gap-4">
                   <Link
-                    className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                    className="rounded-md  px-5 py-2.5 text-l font-medium text-gray-800 bg-gray-300 bg-opacity-50 shadow transition hover:text-gray-100/75"
                     to="/login"
                   >
                     Login
@@ -120,7 +116,7 @@ const NavBar = () => {
 
                   <div className="hidden sm:flex">
                     <Link
-                      className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
+                      className="rounded-md  px-5 py-2.5 text-l font-medium text-white bg-gray-700 bg-opacity-50 shadow transition hover:text-gray-500/75"
                       to="/register"
                     >
                       Register
@@ -189,7 +185,7 @@ const NavBar = () => {
             </li>
 
             {/* IF ADMIN */}
-            {user.rol === "Admin" ? (
+            {user && user.rol === "Admin" ? (
               <li>
                 <Link
                   className="text-white transition hover:text-gray-500/75  ml-5"

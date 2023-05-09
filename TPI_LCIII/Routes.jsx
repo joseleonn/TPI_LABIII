@@ -13,6 +13,7 @@ import Login from "./src/hocs/Login/Login";
 import { UserAuth } from "./src/context/AuthContext";
 import ProductDetail from "./src/components/Catalog/ProductDetail/ProductDetail";
 import AdminDashboard from "./src/hocs/Admin/AdminDashboard";
+import AdminManagment from "./src/components/Admin/AdminManagment";
 
 function RoutesPath() {
   // const location = useLocation();
@@ -31,7 +32,14 @@ function RoutesPath() {
         <Route path="/login" element={<Login />} />
         <Route path="/inicio" element={<Login />} />
         <Route path="/detalleproducto" element={<ProductDetail />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+
+        {/* ADMIN ROUTES */}
+        {user && user.rol === "Admin" ? (
+          <>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/agregarproducto" element={<AdminManagment />} />
+          </>
+        ) : null}
       </Routes>
     </BrowserRouter>
   );
