@@ -49,7 +49,7 @@ const ProductList = () => {
                       <span className="sr-only"> Regular Price </span>
 
                       <span className="tracking-wider text-white text-xl">
-                        $ {product.valor}
+                        $ {product.precio}
                       </span>
                     </p>
                   </div>
