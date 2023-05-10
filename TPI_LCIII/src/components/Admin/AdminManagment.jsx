@@ -149,9 +149,11 @@ const AdminManagment = () => {
           </div>
         </form>
         <div className=" flex justify-center -mt-11 -ml-36">
-          <button className="px-5 py-3 inline-block rounded-lg text-sm">
-            <Link to="/admin">Vovler</Link>
-          </button>
+          <Link to="/admin">
+            <button className="px-5 py-3 inline-block rounded-lg text-sm focus:outline-none sm:text-sm">
+              Vovler
+            </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@ const AdminListProducts = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate("");
   const { categoriaId } = useParams();
+  const [deletedProductId, setDeletedProductId] = useState(null);
 
   useEffect(() => {
     const querydb = getFirestore();
@@ -29,7 +30,7 @@ const AdminListProducts = () => {
         }))
       )
     );
-  }, [categoriaId]);
+  }, [categoriaId, deletedProductId]);
 
   //   FUNCION PARA REMOVER UN PRODUCTO DE LA BASE DE DATOS
   const firestore = getFirestore(app);
@@ -39,6 +40,7 @@ const AdminListProducts = () => {
       const productRef = doc(firestore, `Products/${id}`);
       await deleteDoc(productRef);
       console.log("Datos eliminados correctamente");
+      setDeletedProductId(id); // Actualiza el estado deletedProductId
     } catch (error) {
       console.error("Error al eliminar los datos:", error);
     }
@@ -51,10 +53,11 @@ const AdminListProducts = () => {
             <h2 className="text-xl font-bold text-white sm:text-3xl flex justify-center">
               Productos
             </h2>
-
-            <button>
-              <Link to="/agregarproducto">Agregar Producto</Link>
-            </button>
+            <Link to="/agregarproducto">
+              <button className="focus:outline-none sm:text-sm">
+                Agregar Producto
+              </button>
+            </Link>
           </header>
 
           <ul className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-4 ">
