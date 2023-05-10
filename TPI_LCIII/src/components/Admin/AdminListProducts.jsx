@@ -67,11 +67,13 @@ const AdminListProducts = () => {
                   to="#"
                   className="block overflow-hidden group rounded-md "
                 >
-                  <img
-                    src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                    alt=""
-                    className="h-[250px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[300px]"
-                  />
+                  <div className="flex items-center justify-center bg-white">
+                    <img
+                      src={product.url}
+                      alt=""
+                      className=" h-[250px] w-[200px] object-cover transition duration-500 group-hover:scale-105 "
+                    />
+                  </div>
 
                   <div className="relative pt-3 bg-gray-700 p-1">
                     <h3 className="text-xl text-white">{product.nombre}</h3>

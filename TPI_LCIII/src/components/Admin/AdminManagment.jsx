@@ -10,17 +10,20 @@ import {
 import app from "../../firebase/Credentials";
 import { useState } from "react";
 import NavBar from "../navigation/NavBar";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AdminManagment = () => {
   const { user } = UserAuth();
   const navigate = useNavigate();
   const firestore = getFirestore(app);
+  const storage = getStorage(app);
 
   const [data, setData] = useState({
     nombre: "",
     categoria: "",
     precio: "",
     descripcion: "",
+    url: "",
   });
 
   //funcion para agregar los datos al data
@@ -59,6 +62,24 @@ const AdminManagment = () => {
     }
     // Aquí puedes utilizar los datos del formulario como necesites
     // Por ejemplo, enviar los datos a una función para guardar en la base de datos
+  };
+
+  const fileHandler = async (e) => {
+    //detectamos archivo
+    const localFile = e.target.files[0];
+    //cargarlo a firebase storage
+    const fileRef = ref(storage, `documentos/${localFile.name}`);
+
+    await uploadBytes(fileRef, localFile);
+
+    //obtener url
+
+    const url = await getDownloadURL(fileRef);
+    // Actualizar el estado "data" con la URL del archivo
+    setData((prevData) => ({
+      ...prevData,
+      url: url,
+    }));
   };
 
   return (
@@ -100,9 +121,12 @@ const AdminManagment = () => {
                 placeholder="Seleccione una categoria"
                 name="categoria"
                 required
-                value={data.categoria}
+                value={data.categoria || "default"}
                 onChange={handleChange}
               >
+                <option value={"default"} disabled>
+                  Choose an option
+                </option>
                 <option value="remeras">Remeras</option>
                 <option value="buzos">Buzos</option>
                 <option value="pantalones">Pantalones</option>
@@ -135,6 +159,20 @@ const AdminManagment = () => {
                 name="precio"
                 value={data.precio}
                 onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="relative">
+              <p className="text-gray-400 m-2">Imagen</p>
+              <input
+                type="file"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                placeholder="Ingrese la imagen"
+                name="url"
+                // value={data.url}
+                onChange={fileHandler}
               />
             </div>
           </div>
