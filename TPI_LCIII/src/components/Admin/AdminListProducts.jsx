@@ -10,13 +10,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import app from "../../firebase/Credentials";
+import AdminModifyModal from "./AdminModifyModal";
 
 const AdminListProducts = () => {
   // LLAMADA DE TODOS LOS PRODUCTOS A LA BASE DE DATOS
   const [data, setData] = useState([]);
-  const navigate = useNavigate("");
   const { categoriaId } = useParams();
   const [deletedProductId, setDeletedProductId] = useState(null);
+  const [selectedProductId, setSelectedProductId] = useState("");
 
   useEffect(() => {
     const querydb = getFirestore();
@@ -44,6 +45,11 @@ const AdminListProducts = () => {
     } catch (error) {
       console.error("Error al eliminar los datos:", error);
     }
+  };
+
+  const selectProduct = (productId) => {
+    setSelectedProductId(productId);
+    console.log(productId);
   };
   return (
     <div>
@@ -82,13 +88,20 @@ const AdminListProducts = () => {
                       <span className="tracking-wider text-white text-xl">
                         $ {product.precio}
                       </span>
+                      <div className="mt-6">
+                        <span className="flex justify-end  -mb-11 ">
+                          <TrashIcon
+                            onClick={() => deleteProductHandle(product.id)}
+                            className="h-8 w-8 text-white bg-red-600 rounded-md p-1"
+                          />
+                        </span>
 
-                      <span className="flex justify-end">
-                        <TrashIcon
-                          onClick={() => deleteProductHandle(product.id)}
-                          className="h-8 w-8 text-white bg-red-600 rounded-md p-1"
-                        />
-                      </span>
+                        <span className="flex -mt-6 ">
+                          <button onClick={() => selectProduct(product.id)}>
+                            <AdminModifyModal productId={selectedProductId} />
+                          </button>
+                        </span>
+                      </div>
                     </p>
                   </div>
                 </Link>

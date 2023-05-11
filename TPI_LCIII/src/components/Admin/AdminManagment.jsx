@@ -171,7 +171,6 @@ const AdminManagment = () => {
                 className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                 placeholder="Ingrese la imagen"
                 name="url"
-                // value={data.url}
                 onChange={fileHandler}
               />
             </div>
