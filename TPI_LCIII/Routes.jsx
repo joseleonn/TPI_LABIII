@@ -11,13 +11,13 @@ import Products from "./src/hocs/Products/Products";
 import Register from "./src/hocs/Register/Register";
 import Login from "./src/hocs/Login/Login";
 import { UserAuth } from "./src/context/AuthContext";
-import ProductDetail from "./src/components/Catalog/ProductDetail/ProductDetail";
 import AdminDashboard from "./src/hocs/Admin/AdminDashboard";
 import AdminManagment from "./src/components/Admin/AdminManagment";
-
-function RoutesPath() {
-  // const location = useLocation();
+import ProductsDetails from "./src/hocs/ProductDetail/ProductsDetail";
+import { useState } from "react";
+function RoutesPath(props) {
   const { user } = UserAuth();
+  const { getProductById } = props;
 
   return (
     <BrowserRouter>
@@ -31,7 +31,10 @@ function RoutesPath() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/inicio" element={<Login />} />
-        <Route path="/detalleproducto" element={<ProductDetail />} />
+        <Route
+          path="/detalleproducto/:productId"
+          element={<ProductsDetails />}
+        />
 
         {/* ADMIN ROUTES */}
         {user && user.rol === "Admin" ? (

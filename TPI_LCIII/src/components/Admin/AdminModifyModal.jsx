@@ -16,7 +16,7 @@ const AdminModifyModal = ({ productId }) => {
 
   //TOMAMOS LOS DATOS DE DATA
   const [data, setData] = useState({
-    id: "", // Agrega un campo "id" al estado
+    id: "",
     nombre: "",
     categoria: "",
     precio: "",

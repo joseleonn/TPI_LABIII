@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 const ProductList = () => {
   const [data, setData] = useState([]);
-
   const { categoriaId } = useParams();
+  // const [selectedProductId, setSelectedProductId] = useState("");
 
   useEffect(() => {
     const querydb = getFirestore();
@@ -19,6 +19,12 @@ const ProductList = () => {
       )
     );
   }, [categoriaId]);
+
+  //obtener id para el productdetail
+
+  // const selectProduct = (productId) => {
+  //   setSelectedProductId(productId);
+  // };
   return (
     <div>
       <section>
@@ -33,8 +39,9 @@ const ProductList = () => {
             {data.map((product) => (
               <li className="" key={product.id}>
                 <Link
-                  to="#"
+                  to={`/detalleproducto/${product.id}`}
                   className="block overflow-hidden group rounded-md "
+                  // onClick={() => selectProduct(product.id)}
                 >
                   <div className="flex items-center justify-center bg-white">
                     <img

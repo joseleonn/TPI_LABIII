@@ -1,13 +1,15 @@
 import NavBar from "../../components/navigation/NavBar";
+import ProductDetail from "../../components/Catalog/ProductDetail/ProductDetail";
 import Footer from "../../components/navigation/Footer";
 
-const AboutUs = () => {
+const ProductsDetail = () => {
   return (
     <>
       <NavBar />
+      <ProductDetail />
       <Footer />
     </>
   );
 };
 
-export default AboutUs;
+export default ProductsDetail;

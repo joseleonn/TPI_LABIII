@@ -60,8 +60,6 @@ const AdminManagment = () => {
     } catch (error) {
       console.error("Error al agregar los datos:", error);
     }
-    // Aquí puedes utilizar los datos del formulario como necesites
-    // Por ejemplo, enviar los datos a una función para guardar en la base de datos
   };
 
   const fileHandler = async (e) => {
@@ -80,6 +78,7 @@ const AdminManagment = () => {
       ...prevData,
       url: url,
     }));
+    console.log(url);
   };
 
   return (
