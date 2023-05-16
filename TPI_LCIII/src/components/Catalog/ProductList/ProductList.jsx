@@ -1,30 +1,13 @@
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { CartUseContext } from "../../../context/CartContext";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 const ProductList = () => {
-  const [data, setData] = useState([]);
   const { categoriaId } = useParams();
-  // const [selectedProductId, setSelectedProductId] = useState("");
+  //TRAEMOS LOS PRODUCTOS DESDE CONTEXT
+  const { data } = CartUseContext();
 
-  useEffect(() => {
-    const querydb = getFirestore();
-    const products = collection(querydb, "Products");
-
-    getDocs(products).then((res) =>
-      setData(
-        res.docs.map((product) => ({
-          id: product.id,
-          ...product.data(),
-        }))
-      )
-    );
-  }, [categoriaId]);
-
-  //obtener id para el productdetail
-
-  // const selectProduct = (productId) => {
-  //   setSelectedProductId(productId);
-  // };
   return (
     <div>
       <section>

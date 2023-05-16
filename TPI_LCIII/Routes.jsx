@@ -16,39 +16,42 @@ import ProductsDetails from "./src/hocs/ProductDetail/ProductsDetail";
 import ShoppingCartHoc from "./src/hocs/ShoppingCartHoc/ShoppingCartHoc";
 import AdminDashboardProducts from "./src/hocs/Admin/AdminDashboardProducts";
 import AdminDashboardUsers from "./src/hocs/Admin/AdminDashboardUsers";
+import Layout from "./src/hocs/Layout/Layout";
 function RoutesPath() {
   const { user } = UserAuth();
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="*" element={<Error404 />} />
-        {/* home display */}
+      <Layout>
+        <Routes>
+          <Route path="*" element={<Error404 />} />
+          {/* home display */}
 
-        <Route path="/" element={<Home />} />
-        <Route path="/nosotros" element={<AboutUs />} />
-        <Route path="/productos" element={<Products />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/inicio" element={<Login />} />
-        <Route
-          path="/detalleproducto/:productId"
-          element={<ProductsDetails />}
-        />
-        <Route path="/carrito" element={<ShoppingCartHoc />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/nosotros" element={<AboutUs />} />
+          <Route path="/productos" element={<Products />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/inicio" element={<Login />} />
+          <Route
+            path="/detalleproducto/:productId"
+            element={<ProductsDetails />}
+          />
+          <Route path="/carrito" element={<ShoppingCartHoc />} />
 
-        {/* ADMIN ROUTES */}
-        {user && user.rol === "Admin" ? (
-          <>
-            <Route
-              path="/admin/productos"
-              element={<AdminDashboardProducts />}
-            />
-            <Route path="/agregarproducto" element={<AdminManagment />} />
-            <Route path="/admin/usuarios" element={<AdminDashboardUsers />} />
-          </>
-        ) : null}
-      </Routes>
+          {/* ADMIN ROUTES */}
+          {user && user.rol === "Admin" ? (
+            <>
+              <Route
+                path="/admin/productos"
+                element={<AdminDashboardProducts />}
+              />
+              <Route path="/agregarproducto" element={<AdminManagment />} />
+              <Route path="/admin/usuarios" element={<AdminDashboardUsers />} />
+            </>
+          ) : null}
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }

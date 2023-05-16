@@ -1,12 +1,9 @@
-import React from "react";
-import NavBar from "../../components/navigation/NavBar";
-import Footer from "../../components/navigation/Footer";
+import ShoppingCart from "../../components/ShoppingCart/ShoppingCart";
 
 const ShoppingCartHoc = () => {
   return (
     <>
-      <NavBar />
-      <Footer />
+      <ShoppingCart />
     </>
   );
 };

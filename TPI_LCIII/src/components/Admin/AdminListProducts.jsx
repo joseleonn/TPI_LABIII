@@ -11,41 +11,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import app from "../../firebase/Credentials";
 import AdminModifyModal from "./AdminModifyModal";
+import { CartUseContext } from "../../context/CartContext";
 
 const AdminListProducts = () => {
-  // LLAMADA DE TODOS LOS PRODUCTOS A LA BASE DE DATOS
-  const [data, setData] = useState([]);
+  // LLAMADA DE TODOS LOS PRODUCTOS DESDE CONTEXT
+  const { data, deleteProductHandle } = CartUseContext();
   const { categoriaId } = useParams();
-  const [deletedProductId, setDeletedProductId] = useState(null);
   const [selectedProductId, setSelectedProductId] = useState("");
-
-  useEffect(() => {
-    const querydb = getFirestore();
-    const products = collection(querydb, "Products");
-
-    getDocs(products).then((res) =>
-      setData(
-        res.docs.map((product) => ({
-          id: product.id,
-          ...product.data(),
-        }))
-      )
-    );
-  }, [categoriaId, deletedProductId]);
-
-  //   FUNCION PARA REMOVER UN PRODUCTO DE LA BASE DE DATOS
-  const firestore = getFirestore(app);
-
-  const deleteProductHandle = async (id) => {
-    try {
-      const productRef = doc(firestore, `Products/${id}`);
-      await deleteDoc(productRef);
-      console.log("Datos eliminados correctamente");
-      setDeletedProductId(id); // Actualiza el estado deletedProductId
-    } catch (error) {
-      console.error("Error al eliminar los datos:", error);
-    }
-  };
 
   const selectProduct = (productId) => {
     setSelectedProductId(productId);

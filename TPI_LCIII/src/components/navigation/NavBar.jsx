@@ -123,7 +123,10 @@ const NavBar = () => {
                     <UserModal />
                   </div>
 
-                  <Link className="mt-3 mr-2 text-white " to="/carrito">
+                  <Link
+                    className="mt-3 mr-2 text-white hover:text-gray-300 "
+                    to="/carrito"
+                  >
                     <ShoppingCartIcon className="h-8 w-8" />
                   </Link>
                   <Link
@@ -336,26 +339,6 @@ const NavBar = () => {
           </div>
         </Dialog>
       </Transition.Root>
-
-      {/* ADMIN MENU */}
-      {/* <div
-        className={` transition-transform ${
-          showAdminMenu
-            ? "transform translate-y-0"
-            : "transform -translate-y-full"
-        }  ml-auto max-w-max z-10 fixed inset-0 mt-16`}
-      >
-        <ul className="flex flex-col items-start gap-6 text-md mx-8 ml-44 bg-gray-700 rounded p-2 ">
-          <li className="p-2">
-            <Link
-              className=" text-white transition hover:text-gray-500/75  ml-4"
-              to="/"
-            >
-              Inicio
-            </Link>
-          </li>
-        </ul>
-      </div> */}
     </div>
   );
 };

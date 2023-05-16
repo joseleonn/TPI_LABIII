@@ -21,9 +21,9 @@ const AdminManagment = () => {
   const [data, setData] = useState({
     nombre: "",
     categoria: "",
-    precio: "",
+    precio: 0,
     descripcion: "",
-    stock: "",
+    stock: 0,
     url: "",
   });
 
@@ -57,7 +57,7 @@ const AdminManagment = () => {
     try {
       await addData(data);
       console.log("Datos agregados correctamente");
-      navigate("/admin");
+      navigate("/admin/productos");
     } catch (error) {
       console.error("Error al agregar los datos:", error);
     }

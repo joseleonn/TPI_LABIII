@@ -57,7 +57,6 @@ export const AuthContextProvider = ({ children }) => {
         rol: rol,
       };
       setUser(userData);
-      console.log(userData);
     });
   }
 

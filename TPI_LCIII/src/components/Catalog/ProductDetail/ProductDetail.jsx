@@ -2,9 +2,22 @@ import { Link, useParams } from "react-router-dom";
 import { db } from "../../../firebase/Credentials";
 import { getDoc, collection, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { CartUseContext } from "../../../context/CartContext";
+
 const ProductDetail = () => {
   const { productId } = useParams();
   const [product, setProductInfo] = useState(null);
+  const { cart, setCart } = CartUseContext();
+
+  //FUNCION PARA AGREGAR AL CARRITO
+
+  const addToCart = (e) => {
+    e.preventDefault();
+
+    if (product) {
+      setCart([...cart, product]);
+    }
+  };
 
   //funcion para obetener informacion del producto especifio en la base de datos
   const getProductById = async () => {
@@ -12,14 +25,14 @@ const ProductDetail = () => {
     const docuRef = doc(collectionRef, productId);
     const snapDoc = await getDoc(docuRef);
     const producto = snapDoc.data();
-    console.log(producto);
     return producto;
   };
 
   useEffect(() => {
     const getProduct = async () => {
       const product = await getProductById(productId);
-      setProductInfo(product);
+      setProductInfo({ ...product, id: productId });
+      console.log(product);
     };
     getProduct();
   }, [productId]);
@@ -219,11 +232,22 @@ const ProductDetail = () => {
                 </div>
 
                 <button
-                  type="submit"
+                  onClick={addToCart}
                   className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
                 >
-                  Add to cart
+                  Añadir a carrito
                 </button>
+                <Link
+                  type="button"
+                  to="/carrito"
+                  className="w-full rounded border
+                  border-green-900 bg-green-900 px-6 py-3 text-sm font-bold
+                  uppercase tracking-wide"
+                >
+                  <p className="flex justify-center text-white">
+                    Ir al carrito
+                  </p>
+                </Link>
                 <Link
                   type="button"
                   to="/productos"
