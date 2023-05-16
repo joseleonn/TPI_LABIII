@@ -4,7 +4,7 @@ import "firebase/auth";
 import { UserAuth } from "../../context/AuthContext";
 import { Dialog, Transition } from "@headlessui/react";
 import {
-  CheckIcon,
+  ShoppingCartIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import UserModal from "./UserModal";
@@ -16,6 +16,11 @@ const NavBar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const [showAdminMenu, setShowAdminMenu] = useState(false);
+  const toggleAdminMenu = () => {
+    setShowAdminMenu(!showAdminMenu);
   };
 
   const { user, handleLogOut } = UserAuth();
@@ -76,13 +81,33 @@ const NavBar = () => {
                     </Link>
                   </li>
                   {user && user.rol === "Admin" ? (
-                    <li>
+                    <li className={`${showAdminMenu ? "mt-24 " : ""} `}>
                       <Link
-                        className="text-white transition hover:text-gray-500/75"
-                        to="/admin"
+                        className="text-white transition hover:text-gray-500/75 focus: outline-none"
+                        onClick={toggleAdminMenu}
                       >
                         Administrador
                       </Link>
+                      {showAdminMenu ? (
+                        <ul className="text-white bg-gray-700 rounded-md pt-2 ">
+                          <Link
+                            to="/admin/usuarios"
+                            className="text-white transition hover:text-white focus: outline-none"
+                          >
+                            <li className="p-2 transition-colors duration-300 ease-in-out  hover:text-gray-400">
+                              Usuarios
+                            </li>
+                          </Link>
+                          <Link
+                            to="/admin/productos"
+                            className="text-white transition hover:text-white focus: outline-none"
+                          >
+                            <li className="p-2  transition-colors duration-300 ease-in-out hover:text-gray-400">
+                              Productos
+                            </li>
+                          </Link>
+                        </ul>
+                      ) : null}
                     </li>
                   ) : null}
                 </ul>
@@ -97,6 +122,10 @@ const NavBar = () => {
                   <div>
                     <UserModal />
                   </div>
+
+                  <Link className="mt-3 mr-2 text-white " to="/carrito">
+                    <ShoppingCartIcon className="h-8 w-8" />
+                  </Link>
                   <Link
                     className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow hover:text-red-900"
                     onClick={(e) => setOpen(true)}
@@ -122,6 +151,9 @@ const NavBar = () => {
                       Register
                     </Link>
                   </div>
+                  <Link className="mt-2 mr-2 text-white " to="/carrito">
+                    <ShoppingCartIcon className="h-8 w-8" />
+                  </Link>
                 </div>
               )}
             </div>
@@ -304,6 +336,26 @@ const NavBar = () => {
           </div>
         </Dialog>
       </Transition.Root>
+
+      {/* ADMIN MENU */}
+      {/* <div
+        className={` transition-transform ${
+          showAdminMenu
+            ? "transform translate-y-0"
+            : "transform -translate-y-full"
+        }  ml-auto max-w-max z-10 fixed inset-0 mt-16`}
+      >
+        <ul className="flex flex-col items-start gap-6 text-md mx-8 ml-44 bg-gray-700 rounded p-2 ">
+          <li className="p-2">
+            <Link
+              className=" text-white transition hover:text-gray-500/75  ml-4"
+              to="/"
+            >
+              Inicio
+            </Link>
+          </li>
+        </ul>
+      </div> */}
     </div>
   );
 };

@@ -11,13 +11,13 @@ import Products from "./src/hocs/Products/Products";
 import Register from "./src/hocs/Register/Register";
 import Login from "./src/hocs/Login/Login";
 import { UserAuth } from "./src/context/AuthContext";
-import AdminDashboard from "./src/hocs/Admin/AdminDashboard";
 import AdminManagment from "./src/components/Admin/AdminManagment";
 import ProductsDetails from "./src/hocs/ProductDetail/ProductsDetail";
-import { useState } from "react";
-function RoutesPath(props) {
+import ShoppingCartHoc from "./src/hocs/ShoppingCartHoc/ShoppingCartHoc";
+import AdminDashboardProducts from "./src/hocs/Admin/AdminDashboardProducts";
+import AdminDashboardUsers from "./src/hocs/Admin/AdminDashboardUsers";
+function RoutesPath() {
   const { user } = UserAuth();
-  const { getProductById } = props;
 
   return (
     <BrowserRouter>
@@ -35,12 +35,17 @@ function RoutesPath(props) {
           path="/detalleproducto/:productId"
           element={<ProductsDetails />}
         />
+        <Route path="/carrito" element={<ShoppingCartHoc />} />
 
         {/* ADMIN ROUTES */}
         {user && user.rol === "Admin" ? (
           <>
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route
+              path="/admin/productos"
+              element={<AdminDashboardProducts />}
+            />
             <Route path="/agregarproducto" element={<AdminManagment />} />
+            <Route path="/admin/usuarios" element={<AdminDashboardUsers />} />
           </>
         ) : null}
       </Routes>

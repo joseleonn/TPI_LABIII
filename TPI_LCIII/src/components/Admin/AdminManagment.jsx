@@ -23,6 +23,7 @@ const AdminManagment = () => {
     categoria: "",
     precio: "",
     descripcion: "",
+    stock: "",
     url: "",
   });
 
@@ -124,7 +125,7 @@ const AdminManagment = () => {
                 onChange={handleChange}
               >
                 <option value={"default"} disabled>
-                  Choose an option
+                  Elija una opcion
                 </option>
                 <option value="remeras">Remeras</option>
                 <option value="buzos">Buzos</option>
@@ -164,6 +165,21 @@ const AdminManagment = () => {
 
           <div>
             <div className="relative">
+              <p className="text-gray-400 m-2">Stock</p>
+              <input
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                placeholder="Ingrese el stock del producto"
+                required
+                type="number"
+                name="stock"
+                value={data.stock}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="relative">
               <p className="text-gray-400 m-2">Imagen</p>
               <input
                 type="file"
@@ -185,7 +201,7 @@ const AdminManagment = () => {
           </div>
         </form>
         <div className=" flex justify-center -mt-11 -ml-36">
-          <Link to="/admin">
+          <Link to="/admin/productos">
             <button className="px-5 py-3 inline-block rounded-lg text-sm focus:outline-none sm:text-sm">
               Vovler
             </button>

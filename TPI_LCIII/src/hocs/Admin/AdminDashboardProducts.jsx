@@ -1,8 +1,8 @@
 import NavBar from "../../components/navigation/NavBar";
-import Footer from "../../components/navigation/Footer";
-import AdminManagment from "../../components/Admin/AdminManagment";
 import AdminListProducts from "../../components/Admin/AdminListProducts";
-const AdminDashboard = () => {
+import Footer from "../../components/navigation/Footer";
+
+const AdminDashboardProducts = () => {
   return (
     <>
       <NavBar />
@@ -12,4 +12,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default AdminDashboardProducts;
