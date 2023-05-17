@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import "firebase/auth";
 import { UserAuth } from "../../context/AuthContext";
 import { Dialog, Transition } from "@headlessui/react";
@@ -12,8 +12,10 @@ import UserModalMovil from "./UserModalMovil";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
-
+  const { user, handleLogOut } = UserAuth();
   const [showMenu, setShowMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -23,17 +25,35 @@ const NavBar = () => {
     setShowAdminMenu(!showAdminMenu);
   };
 
-  const { user, handleLogOut } = UserAuth();
-
   const logout = async () => {
     handleLogOut();
     setOpen(false);
   };
+
+  //FUNCION QUE PARA CUANDO HAGA SCROLL PARA ABAJO CAMBIE EL CSS DEL NAVBAR
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <div>
-      <header aria-label="Site Header" className="bg-transparent">
+      <header aria-label="Site Header" className="bg-transparent m-0">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
-          <div className="flex h-16 items-center justify-between fixed inset-0 z-10 bg-transparent   ">
+          <div
+            className={`flex h-16 items-center justify-between fixed inset-0 z-10  ${
+              scrolled
+                ? "bg-black bg-opacity-90 shadow-md transition ease-in-out delay-200"
+                : "bg-transparent"
+            }`}
+          >
             <div className="md:flex md:items-center md:gap-12 p-8 ">
               <a className="block text-teal-600" href="/">
                 <span className="sr-only">Home</span>

@@ -7,7 +7,7 @@ import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import app from "../../firebase/Credentials";
 
-const AdminModifyModal = ({ userId, userEmail }) => {
+const AdminModifyModalUser = ({ userId, userEmail }) => {
   const [open, setOpen] = useState(false);
   const { user } = UserAuth();
   const firestore = getFirestore(app);
@@ -162,4 +162,4 @@ const AdminModifyModal = ({ userId, userEmail }) => {
   );
 };
 
-export default AdminModifyModal;
+export default AdminModifyModalUser;

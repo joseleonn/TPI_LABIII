@@ -4,8 +4,8 @@ const Featured = () => {
       <section>
         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <header className="text-center">
-            <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
-              New Collection
+            <h2 className="text-xl font-bold text-white sm:text-3xl">
+              Nueva Coleccion
             </h2>
 
             <p className="max-w-md mx-auto mt-4 text-gray-500">
