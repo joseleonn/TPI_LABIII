@@ -180,6 +180,7 @@ const NavBar = () => {
                   </div>
                   <Link className="mt-2 mr-2 text-white " to="/carrito">
                     <ShoppingCartIcon className="h-8 w-8" />
+                    {cart.length > 0 ? <TotalItems /> : null}
                   </Link>
                 </div>
               )}
