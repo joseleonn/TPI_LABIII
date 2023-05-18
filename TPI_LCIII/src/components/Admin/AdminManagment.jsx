@@ -25,6 +25,7 @@ const AdminManagment = () => {
     descripcion: "",
     stock: 0,
     url: "",
+    quanty: 1,
   });
 
   //funcion para agregar los datos al data

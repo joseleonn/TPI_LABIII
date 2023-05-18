@@ -9,12 +9,15 @@ import {
 } from "@heroicons/react/24/outline";
 import UserModal from "./UserModal";
 import UserModalMovil from "./UserModalMovil";
+import TotalItems from "../ShoppingCart/TotalItems";
+import { CartUseContext } from "../../context/CartContext";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const { user, handleLogOut } = UserAuth();
   const [showMenu, setShowMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { itemsQuanty, cart } = CartUseContext();
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -148,6 +151,7 @@ const NavBar = () => {
                     to="/carrito"
                   >
                     <ShoppingCartIcon className="h-8 w-8" />
+                    {cart.length > 0 ? <TotalItems /> : null}
                   </Link>
                   <Link
                     className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow hover:text-red-900"

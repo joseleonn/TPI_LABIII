@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   getAuth,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import app, { auth } from "../firebase/Credentials";
 import { useContext, useEffect, useState, createContext } from "react";
@@ -28,16 +29,9 @@ export const AuthContextProvider = ({ children }) => {
 
   const handleSingIn = async (email, password) => {
     const auth = getAuth();
-    const { user } = signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        setUser(user);
-        console.log(user);
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    const { user } = signInWithEmailAndPassword(auth, email, password);
+
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const handleLogOut = async () => {
@@ -73,7 +67,11 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
 
-  const value = { user, handleLogOut, handleSingIn };
+  const ResetPassword = (email) => {
+    sendPasswordResetEmail(auth, email);
+  };
+
+  const value = { user, handleLogOut, handleSingIn, ResetPassword };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

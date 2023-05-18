@@ -33,7 +33,7 @@ const AdminListUsers = () => {
         }))
       )
     );
-  }, [categoriaId]);
+  }, []);
 
   //   FUNCION PARA REMOVER UN PRODUCTO DE LA BASE DE DATOS
   //   const firestore = getFirestore(app);
@@ -73,44 +73,48 @@ const AdminListUsers = () => {
             </Link> */}
           </header>
 
-          <table className="min-w-full  bg-transparent text-sm">
-            {data.map((user) => (
-              <li className="" key={user.id}>
-                <Link
-                  to="#"
-                  className="block overflow-hidden group rounded-md "
-                >
-                  <div className="relative pt-3 bg-gray-700 p-1">
-                    <h3 className="text-xl text-white">Email: {user.correo}</h3>
-                    <h3 className="text-xl text-white">Rol: {user.rol}</h3>
+          <table className="min-w-full  bg-transparent text-sm ">
+            <tbody>
+              <tr>
+                {data.map((user) => (
+                  <td className="" key={user.id}>
+                    <Link
+                      to="#"
+                      className="block overflow-hidden group rounded-md "
+                    >
+                      <div className="relative pt-3 bg-gray-700 p-1 m-2 rounded-md">
+                        <h3 className="text-xl text-white">
+                          Email: {user.correo}
+                        </h3>
+                        <h3 className="text-xl text-white">Rol: {user.rol}</h3>
 
-                    <p className="mt-2">
-                      <div className="mt-6">
-                        {/* <span className="flex justify-start ml-28 -mb-9 ">
+                        <div className="mt-6">
+                          {/* <span className="flex justify-start ml-28 -mb-9 ">
                           <TrashIcon
                             onClick={() => deleteProductHandle(user.id)}
                             className="h-8 w-8 text-white bg-red-600 rounded-md p-1"
                           />
                         </span> */}
 
-                        <span className="flex -mt-6 ">
-                          <button
-                            onClick={() => {
-                              selectUser(user.id), selectUserE(user.correo);
-                            }}
-                          >
-                            <AdminModifyModalUser
-                              userId={selectedUserId}
-                              userEmail={selectedUserEmail}
-                            />
-                          </button>
-                        </span>
+                          <span className="flex -mt-6 ">
+                            <button
+                              onClick={() => {
+                                selectUser(user.id), selectUserE(user.correo);
+                              }}
+                            >
+                              <AdminModifyModalUser
+                                userId={selectedUserId}
+                                userEmail={selectedUserEmail}
+                              />
+                            </button>
+                          </span>
+                        </div>
                       </div>
-                    </p>
-                  </div>
-                </Link>
-              </li>
-            ))}
+                    </Link>
+                  </td>
+                ))}
+              </tr>
+            </tbody>
           </table>
         </div>
       </section>

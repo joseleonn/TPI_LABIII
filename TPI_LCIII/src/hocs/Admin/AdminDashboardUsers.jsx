@@ -5,9 +5,7 @@ import NavBar from "../../components/navigation/NavBar";
 const AdminDashboardUsers = () => {
   return (
     <>
-      <NavBar />
       <AdminListUsers />
-      <Footer />
     </>
   );
 };

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { CartUseContext } from "../../context/CartContext";
-import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import SumAndRestProduct from "./SumAndRestProduct";
 
@@ -9,9 +8,19 @@ const ShoppingCart = () => {
   const [deleteId, setDeleteId] = useState();
 
   const cartTotal = cart.reduce(
-    (acc, element) => acc + parseInt(element.precio),
+    (acc, element) => acc + parseInt(element.precio) * element.quanty,
     0
   );
+
+  const deleteProductCart = (id) => {
+    const foundId = cart.find((item) => item.id === id);
+
+    const newCart = cart.filter((element) => {
+      return element !== foundId;
+    });
+
+    setCart(newCart);
+  };
   return (
     <div>
       <section>
@@ -28,7 +37,7 @@ const ShoppingCart = () => {
                 <div className="mt-8">
                   <ul className="space-y-4 bg-white rounded-md p-4">
                     {cart?.map((product) => (
-                      <li className="flex items-center gap-4" key={uuidv4()}>
+                      <li className="flex items-center gap-4" key={product.id}>
                         <img
                           src={product.url}
                           alt=""
@@ -49,10 +58,13 @@ const ShoppingCart = () => {
                         </div>
 
                         <div className="flex flex-1 items-center justify-end gap-2">
-                          <SumAndRestProduct quanty={1} />
+                          <SumAndRestProduct
+                            quanty={product.quanty}
+                            product={product}
+                          />
 
                           <button
-                            onClick={() => deleteProductCart(product)}
+                            onClick={() => deleteProductCart(product.id)}
                             className="text-gray-600 transition hover:text-red-600"
                           >
                             <span className="sr-only">Remove item</span>
@@ -72,6 +84,10 @@ const ShoppingCart = () => {
                               />
                             </svg>
                           </button>
+                        </div>
+
+                        <div className="divide-x-4 p-2 font-bold">
+                          $ {product.precio * product.quanty}
                         </div>
                       </li>
                     ))}

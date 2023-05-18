@@ -56,25 +56,23 @@ const AdminListProducts = () => {
                   <div className="relative pt-3 bg-gray-700 p-1">
                     <h3 className="text-xl text-white">{product.nombre}</h3>
 
-                    <p className="mt-2">
-                      <span className="tracking-wider text-white text-xl">
-                        $ {product.precio}
+                    <span className="tracking-wider text-white text-xl">
+                      $ {product.precio}
+                    </span>
+                    <div className="mt-6">
+                      <span className="flex justify-end  -mb-11 ">
+                        <TrashIcon
+                          onClick={() => deleteProductHandle(product.id)}
+                          className="h-8 w-8 text-white bg-red-600 rounded-md p-1"
+                        />
                       </span>
-                      <div className="mt-6">
-                        <span className="flex justify-end  -mb-11 ">
-                          <TrashIcon
-                            onClick={() => deleteProductHandle(product.id)}
-                            className="h-8 w-8 text-white bg-red-600 rounded-md p-1"
-                          />
-                        </span>
 
-                        <span className="flex -mt-6 ">
-                          <button onClick={() => selectProduct(product.id)}>
-                            <AdminModifyModal productId={selectedProductId} />
-                          </button>
-                        </span>
-                      </div>
-                    </p>
+                      <span className="flex -mt-6 ">
+                        <button onClick={() => selectProduct(product.id)}>
+                          <AdminModifyModal productId={selectedProductId} />
+                        </button>
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </li>

@@ -5,13 +5,14 @@ import "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import app, { auth } from "../../firebase/Credentials";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import Alerts from "./Alerts";
 
 const firestore = getFirestore(app);
 const RegisterFormFire = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rol, setRol] = useState("Cliente");
-
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,12 +30,12 @@ const RegisterFormFire = () => {
         navigate("/");
       })
       .catch((error) => {
-        alert(error.message);
+        setError(error.message);
       });
   };
   return (
     <div>
-      <section className=" bg-white">
+      <section className=" bg-gray-800">
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
           <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
             <img
@@ -104,6 +105,7 @@ const RegisterFormFire = () => {
                 </p>
               </div>
 
+              {error && <Alerts message={error} />}
               <form
                 action="#"
                 onSubmit={handleSubmit}
@@ -112,7 +114,7 @@ const RegisterFormFire = () => {
                 <div className="col-span-6">
                   <label
                     htmlFor="Email"
-                    className="block text-sm font-medium text-gray-700 p-2"
+                    className="block text-sm font-medium text-white p-2"
                   >
                     Email
                   </label>
@@ -131,7 +133,7 @@ const RegisterFormFire = () => {
                 <div className="col-span-6 sm:col-span-3">
                   <label
                     htmlFor="Password"
-                    className="block text-sm font-medium text-gray-700 p-2"
+                    className="block text-sm font-medium text-white p-2"
                   >
                     Password
                   </label>
@@ -150,7 +152,7 @@ const RegisterFormFire = () => {
                 <div className="col-span-6 sm:col-span-3">
                   <label
                     htmlFor="PasswordConfirmation"
-                    className="block text-sm font-medium text-gray-700 p-2"
+                    className="block text-sm font-medium text-white p-2"
                   >
                     Password Confirmation
                   </label>
@@ -187,7 +189,7 @@ const RegisterFormFire = () => {
 
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     Already have an account?
-                    <Link href="#" className="text-gray-700 underline">
+                    <Link to="/login" className="text-gray-700 underline">
                       Log in
                     </Link>
                     .

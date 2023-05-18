@@ -11,6 +11,10 @@ import app from "../firebase/Credentials";
 
 export const CartContext = createContext();
 
+//////////////
+//CONTEXTO DE CARRITO Y DE PRODUCTOS
+/////////////
+
 export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
@@ -46,8 +50,35 @@ export const CartContextProvider = ({ children }) => {
       console.error("Error al eliminar los datos:", error);
     }
   };
-  const value = { cart, setCart, data, deleteProductHandle };
 
+  //Funcion para acumular productos iguales
+  const addToCart = (product) => {
+    const productrepeat = cart.find((item) => item.id === product.id);
+
+    if (productrepeat) {
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? { ...product, quanty: productrepeat.quanty + 1 }
+            : item
+        )
+      );
+    } else {
+      setCart([...cart, product]);
+    }
+  };
+
+  //funcion para saber la cantidad de items en el carrito
+  const itemsQuanty = cart.reduce((acc, el) => acc + el.quanty, 0);
+
+  const value = {
+    cart,
+    setCart,
+    data,
+    deleteProductHandle,
+    addToCart,
+    itemsQuanty,
+  };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 

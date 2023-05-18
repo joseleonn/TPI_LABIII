@@ -2,11 +2,28 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CartUseContext } from "../../../context/CartContext";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
+
 const ProductList = () => {
-  const { categoriaId } = useParams();
   //TRAEMOS LOS PRODUCTOS DESDE CONTEXT
-  const { data } = CartUseContext();
+  const { data, addToCart } = CartUseContext();
+  const [addCheckMap, setAddCheckMap] = useState(false);
+
+  //CAMBIA EL ICONO DEL CARRITO A UN CHECK MEDIANMTE UN ESTADO
+  const handlerAddCheck = (productId) => {
+    setAddCheckMap((prevState) => ({
+      ...prevState,
+      [productId]: !prevState[productId],
+    }));
+
+    //LE AGREGA UN TIMEOUT PARA CANCELAR ESE ESTADO Y VOLVER AL INICIAL
+    setTimeout(() => {
+      setAddCheckMap((prevState) => ({
+        ...prevState,
+        [productId]: !prevState[productId],
+      }));
+    }, 1000); // Delay de 1 segundo (1000 milisegundos)
+  };
 
   return (
     <div>
@@ -46,6 +63,20 @@ const ProductList = () => {
                     </p>
                   </div>
                 </Link>
+
+                <button
+                  onClick={() => {
+                    addToCart(product);
+                    handlerAddCheck(product.id);
+                  }}
+                  className="bg-transparent flex justify-end ml-52 -mt-14 relative border border-white focus:outline-none hover:border-white"
+                >
+                  {addCheckMap[product.id] ? (
+                    <CheckIcon className="h-6 w-6 text-white" />
+                  ) : (
+                    <ShoppingCartIcon className="h-6 w-6 text-white" />
+                  )}
+                </button>
               </li>
             ))}
           </ul>

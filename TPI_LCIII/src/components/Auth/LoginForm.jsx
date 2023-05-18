@@ -4,21 +4,41 @@ import { useState } from "react";
 import { UserAuth } from "../../context/AuthContext";
 import { Typewriter } from "react-simple-typewriter";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
+import Alerts from "./Alerts";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState();
 
   const navigate = useNavigate();
-  const { user, handleSingIn } = UserAuth();
+  const { user, handleSingIn, ResetPassword } = UserAuth();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleSingIn(email, password);
+    try {
+      await handleSingIn(email, password);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   if (user) {
     navigate("/");
   }
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    if (!email)
+      return setError("Porfavor ingrese el mail para cambiar la contraseña");
+    setError("Email Enviado!");
+
+    try {
+      await ResetPassword(email);
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -44,6 +64,7 @@ const LoginForm = () => {
                 className="mt-8 grid grid-cols-6 gap-6 "
               >
                 <div className="col-span-6">
+                  {error && <Alerts message={error} />}
                   <label
                     htmlFor="Email"
                     className="block text-sm font-medium text-white p-2"
@@ -87,12 +108,22 @@ const LoginForm = () => {
                   </button>
 
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-                    Already have an account?
+                    Ya tienes una cuenta?
                     <Link
                       to="/register"
-                      className="text-gray-700 underline pl-2"
+                      className="text-gray-200 underline pl-2"
                     >
                       Registrarse
+                    </Link>
+                    .
+                  </p>
+                  <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                    Olvidaste tu contraseña?
+                    <Link
+                      className="text-gray-200 underline pl-2"
+                      onClick={handleResetPassword}
+                    >
+                      Cambiala
                     </Link>
                     .
                   </p>
