@@ -10,12 +10,7 @@ import {
 const UserModal = () => {
   const [open, setOpen] = useState(false);
 
-  const { user, handleLogOut } = UserAuth();
-
-  const logout = async () => {
-    handleLogOut();
-    setOpen(false);
-  };
+  const { user } = UserAuth();
 
   return (
     <div>

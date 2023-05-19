@@ -35,16 +35,18 @@ const ShoppingCart = () => {
               <>
                 {" "}
                 <div className="mt-8">
-                  <ul className="space-y-4 bg-white rounded-md p-4 ">
+                  <ul className=" bg-white rounded-md p-4 ">
                     {cart?.map((product) => (
-                      <li className="flex items-center gap-4" key={product.id}>
-                        <div className="flex text-sm ">
-                          <img
-                            src={product.url}
-                            alt=""
-                            className="h-16 w-16 rounded object-cover"
-                          />
-
+                      <li
+                        className="flex flex-wrap justify-between "
+                        key={product.id}
+                      >
+                        <img
+                          src={product.url}
+                          alt=""
+                          className="h-16 w-16 rounded object-cover"
+                        />
+                        <div className="flex items-center justify-center w-full flex-grow pl-4">
                           <div>
                             <h3 className="text-sm text-gray-900">
                               {product.nombre}

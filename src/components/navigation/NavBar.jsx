@@ -8,7 +8,6 @@ import {
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import UserModal from "./UserModal";
-import UserModalMovil from "./UserModalMovil";
 import TotalItems from "../ShoppingCart/TotalItems";
 import { CartUseContext } from "../../context/CartContext";
 import NavBarMobile from "./NavBarMobile";
@@ -180,7 +179,7 @@ const NavBar = () => {
                       Register
                     </Link>
                   </div>
-                  <Link className=" mr-2 text-white  " to="/carrito">
+                  <Link className=" mr-2 text-white " to="/carrito">
                     <ShoppingCartIcon className="h-8 w-8 " />
                     {cart.length > 0 ? <TotalItems /> : null}
                   </Link>
