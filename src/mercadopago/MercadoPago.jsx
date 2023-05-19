@@ -1,6 +1,9 @@
-// SDK de Mercado Pago
-const mercadopago = require("mercadopago");
+import mercadopago from "mercadopago";
+
 // Agrega credenciales
 mercadopago.configure({
-  access_token: "PROD_ACCESS_TOKEN",
+  access_token:
+    "TEST-7001610389928129-051810-a415e894d2ea23fa158632f88f6d19ea-185657926",
 });
+
+export default mercadopago;

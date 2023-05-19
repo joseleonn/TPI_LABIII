@@ -63,20 +63,21 @@ const ProductList = () => {
                     </p>
                   </div>
                 </Link>
-
-                <button
-                  onClick={() => {
-                    addToCart(product);
-                    handlerAddCheck(product.id);
-                  }}
-                  className="bg-transparent flex justify-end ml-52 -mt-14 relative border border-white focus:outline-none hover:border-white"
-                >
-                  {addCheckMap[product.id] ? (
-                    <CheckIcon className="h-6 w-6 text-white" />
-                  ) : (
-                    <ShoppingCartIcon className="h-6 w-6 text-white" />
-                  )}
-                </button>
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => {
+                      addToCart(product);
+                      handlerAddCheck(product.id);
+                    }}
+                    className="bg-transparent m-2 -mt-16 relative border border-white focus:outline-none hover:border-white"
+                  >
+                    {addCheckMap[product.id] ? (
+                      <CheckIcon className="h-6 w-6 text-white" />
+                    ) : (
+                      <ShoppingCartIcon className="h-6 w-6 text-white" />
+                    )}
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
