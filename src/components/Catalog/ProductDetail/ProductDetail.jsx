@@ -69,40 +69,46 @@ const ProductDetail = () => {
                   </p>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    addToCart(product);
-                    handlerAddCheck();
-                  }}
-                  className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
-                >
-                  {addCheck ? (
-                    <p className="text-center text-white">
-                      <CheckIcon className="h-8 w-8" />
-                    </p>
-                  ) : (
-                    <p>Añadir al carrito</p>
-                  )}
-                </button>
-                <Link
-                  type="button"
-                  to="/carrito"
-                  className="w-full rounded border
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      addToCart(product);
+                      handlerAddCheck();
+                    }}
+                    className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
+                  >
+                    {addCheck ? (
+                      <p className="text-center text-white">
+                        <CheckIcon className="h-8 w-8" />
+                      </p>
+                    ) : (
+                      <p>Añadir al carrito</p>
+                    )}
+                  </button>
+                </div>
+                <div>
+                  <Link
+                    type="button"
+                    to="/carrito"
+                    className="w-full rounded border
                   border-green-900 bg-green-900 px-6 py-3 text-sm font-bold
                   uppercase"
-                >
-                  <p className="text-center text-white">Ir al carrito</p>
-                </Link>
-                <Link
-                  type="button"
-                  to="/productos"
-                  className="w-full rounded border
+                  >
+                    <p className="text-center text-white">Ir al carrito</p>
+                  </Link>
+                </div>
+                <div>
+                  <Link
+                    type="button"
+                    to="/productos"
+                    className="w-full rounded border
                   border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold
                   uppercase tracking-wide"
-                >
-                  <p className="text-center ">Volver</p>
-                </Link>
+                  >
+                    <p className="text-center ">Volver</p>
+                  </Link>
+                </div>
               </form>
             </div>
 
