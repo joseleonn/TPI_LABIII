@@ -19,7 +19,7 @@ const SumAndRestProduct = ({ product, quanty }) => {
   };
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2 text-black-600">
       <p
         className="p-4 text-xl font-bold cursor-pointer	"
         onClick={() => addToCart(product)}
