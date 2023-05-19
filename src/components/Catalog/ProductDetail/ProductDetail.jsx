@@ -69,14 +69,13 @@ const ProductDetail = () => {
                   </p>
                 </div>
 
-                <div>
+                <div className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white">
                   <button
                     type="button"
                     onClick={() => {
                       addToCart(product);
                       handlerAddCheck();
                     }}
-                    className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
                   >
                     {addCheck ? (
                       <p className="text-center text-white">
@@ -87,25 +86,21 @@ const ProductDetail = () => {
                     )}
                   </button>
                 </div>
-                <div>
-                  <Link
-                    type="button"
-                    to="/carrito"
-                    className="w-full rounded border
+                <div
+                  className="w-full rounded border
                   border-green-900 bg-green-900 px-6 py-3 text-sm font-bold
                   uppercase"
-                  >
+                >
+                  <Link type="button" to="/carrito">
                     <p className="text-center text-white">Ir al carrito</p>
                   </Link>
                 </div>
-                <div>
-                  <Link
-                    type="button"
-                    to="/productos"
-                    className="w-full rounded border
+                <div
+                  className="w-full rounded border
                   border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold
                   uppercase tracking-wide"
-                  >
+                >
+                  <Link type="button" to="/productos">
                     <p className="text-center ">Volver</p>
                   </Link>
                 </div>
