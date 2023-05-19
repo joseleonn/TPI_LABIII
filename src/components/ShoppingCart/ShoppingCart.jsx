@@ -35,48 +35,50 @@ const ShoppingCart = () => {
               <>
                 {" "}
                 <div className="mt-8">
-                  <ul className="space-y-4 bg-white rounded-md p-4">
+                  <ul className="space-y-4 bg-white rounded-md p-4 ">
                     {cart?.map((product) => (
                       <li className="flex items-center gap-4" key={product.id}>
-                        <img
-                          src={product.url}
-                          alt=""
-                          className="h-16 w-16 rounded object-cover"
-                        />
-
-                        <div>
-                          <h3 className="text-sm text-gray-900">
-                            {product.nombre}
-                          </h3>
-
-                          <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
-                            <div>
-                              <dt className="inline">Size:</dt>
-                              <dd className="inline">XXS</dd>
-                            </div>
-                          </dl>
-                        </div>
-
-                        <div className="flex flex-1 items-center justify-end gap-2 ">
-                          <div className="flex">
-                            <SumAndRestProduct
-                              quanty={product.quanty}
-                              product={product}
-                            />
-                          </div>
+                        <div className="flex text-sm ">
+                          <img
+                            src={product.url}
+                            alt=""
+                            className="h-16 w-16 rounded object-cover"
+                          />
 
                           <div>
-                            <button
-                              onClick={() => deleteProductCart(product.id)}
-                              className="text-gray-600 transition hover:border-white"
-                            >
-                              <TrashIcon className="w-6 h-6 text-red-600" />
-                            </button>
-                          </div>
-                        </div>
+                            <h3 className="text-sm text-gray-900">
+                              {product.nombre}
+                            </h3>
 
-                        <div className="divide-x-4 p-2 font-bold">
-                          $ {product.precio * product.quanty}
+                            <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+                              <div>
+                                <dt className="inline">Size:</dt>
+                                <dd className="inline">XXS</dd>
+                              </div>
+                            </dl>
+                          </div>
+
+                          <div className="flex flex-1 items-center justify-end gap-2 ">
+                            <div className="flex">
+                              <SumAndRestProduct
+                                quanty={product.quanty}
+                                product={product}
+                              />
+                            </div>
+
+                            <div>
+                              <button
+                                onClick={() => deleteProductCart(product.id)}
+                                className="text-gray-600 transition hover:border-white"
+                              >
+                                <TrashIcon className="w-6 h-6 text-red-600" />
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="divide-x-4 p-2 font-bold">
+                            $ {product.precio * product.quanty}
+                          </div>
                         </div>
                       </li>
                     ))}
