@@ -71,7 +71,7 @@ const ProductDetail = () => {
 
                 <div className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase  text-center tracking-wide text-white">
                   <button
-                    className="focus:outline-none hover:outline-none border-none"
+                    className="focus:outline-none hover:outline-none border-none w-full"
                     type="button"
                     onClick={() => {
                       addToCart(product);
@@ -79,11 +79,11 @@ const ProductDetail = () => {
                     }}
                   >
                     {addCheck ? (
-                      <p className="text-center text-white">
+                      <p className="flex justify-center text-white">
                         <CheckIcon className="h-8 w-8" />
                       </p>
                     ) : (
-                      <p>Añadir al carrito</p>
+                      <p className="w-full uppercase">Añadir al carrito</p>
                     )}
                   </button>
                 </div>
@@ -92,8 +92,10 @@ const ProductDetail = () => {
                   border-green-900 bg-green-900 px-6 py-3 text-sm font-bold
                   uppercase text-center"
                 >
-                  <Link type="button" to="/carrito">
-                    <p className="text-center text-white">Ir al carrito</p>
+                  <Link className="w-full" type="button" to="/carrito">
+                    <p className="text-center text-white w-full">
+                      Ir al carrito
+                    </p>
                   </Link>
                 </div>
                 <div
@@ -101,8 +103,8 @@ const ProductDetail = () => {
                   border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold
                   uppercase tracking-wide text-center"
                 >
-                  <Link type="button" to="/productos">
-                    <p className="text-center ">Volver</p>
+                  <Link className="w-full" type="button" to="/productos">
+                    <p className="text-center w-full ">Volver</p>
                   </Link>
                 </div>
               </form>
