@@ -78,7 +78,7 @@ const ProductDetail = () => {
                   className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
                 >
                   {addCheck ? (
-                    <p className="flex justify-center">
+                    <p className="text-center text-white">
                       <CheckIcon className="h-8 w-8" />
                     </p>
                   ) : (
@@ -90,11 +90,9 @@ const ProductDetail = () => {
                   to="/carrito"
                   className="w-full rounded border
                   border-green-900 bg-green-900 px-6 py-3 text-sm font-bold
-                  uppercase tracking-wide"
+                  uppercase"
                 >
-                  <p className="flex justify-center text-white">
-                    Ir al carrito
-                  </p>
+                  <p className="text-center text-white">Ir al carrito</p>
                 </Link>
                 <Link
                   type="button"
@@ -103,7 +101,7 @@ const ProductDetail = () => {
                   border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold
                   uppercase tracking-wide"
                 >
-                  <p className="flex justify-center">Volver</p>
+                  <p className="text-center ">Volver</p>
                 </Link>
               </form>
             </div>
