@@ -104,6 +104,7 @@ const NavBarMobile = ({
                 <Link
                   className="text-white transition hover:text-gray-500/75 ml-4"
                   to="/login"
+                  onClick={toggleMenu}
                 >
                   Login
                 </Link>
@@ -113,6 +114,7 @@ const NavBarMobile = ({
                 <Link
                   className="text-white transition hover:text-gray-500/75 ml-4 mt-6"
                   to="/register"
+                  onClick={toggleMenu}
                 >
                   Register
                 </Link>
