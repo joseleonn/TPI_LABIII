@@ -61,6 +61,7 @@ const NavBarMobile = ({
               {showAdminMenu ? (
                 <ul className="text-white bg-gray-800 rounded-md pt-2 ">
                   <Link
+                    onClick={toggleMenu}
                     to="/admin/usuarios"
                     className="text-white transition hover:text-white focus: outline-none"
                   >
@@ -69,6 +70,7 @@ const NavBarMobile = ({
                     </li>
                   </Link>
                   <Link
+                    onClick={toggleMenu}
                     to="/admin/productos"
                     className="text-white transition hover:text-white focus: outline-none"
                   >

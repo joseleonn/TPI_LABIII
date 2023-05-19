@@ -21,9 +21,9 @@ const AdminManagment = () => {
   const [data, setData] = useState({
     nombre: "",
     categoria: "",
-    precio: 0,
+    precio: "",
     descripcion: "",
-    stock: 0,
+    stock: "",
     url: "",
     quanty: 1,
   });
