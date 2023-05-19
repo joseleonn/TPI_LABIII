@@ -11,6 +11,8 @@ import UserModal from "./UserModal";
 import UserModalMovil from "./UserModalMovil";
 import TotalItems from "../ShoppingCart/TotalItems";
 import { CartUseContext } from "../../context/CartContext";
+import NavBarMobile from "./NavBarMobile";
+import ModalLogOut from "./ModalLogOut";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -186,10 +188,17 @@ const NavBar = () => {
               )}
             </div>
 
-            <div className="block md:hidden">
+            <div className="block flex md:hidden">
+              <Link
+                className=" mt-4 mr-2 text-white hover:text-white "
+                to="/carrito"
+              >
+                <ShoppingCartIcon className="h-8 w-8" />
+                {cart.length > 0 ? <TotalItems /> : null}
+              </Link>
               <button
                 onClick={toggleMenu}
-                className="rounded bg-transparent p-4 text-gray-600 transition mr-4 focus:outline-none "
+                className="rounded bg-transparent p-4 text-gray-600 transition mr-4 focus:outline-none m-2 hover:border-transparent"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -211,159 +220,17 @@ const NavBar = () => {
         </div>
 
         {/* // movil nav */}
-        <div
-          className={` transition-transform ${
-            showMenu ? "transform translate-x-0" : "transform translate-x-full"
-          } md:hidden ml-auto max-w-max z-10 fixed inset-0 mt-16`}
-        >
-          <ul className="flex flex-col items-start gap-6 text-md mx-8 ml-44 bg-gray-700 rounded p-2 ">
-            <li className="p-2">
-              <Link
-                className=" text-white transition hover:text-gray-500/75  ml-4"
-                to="/"
-              >
-                Inicio
-              </Link>
-            </li>
 
-            <li className="p-2">
-              <Link
-                className=" text-white transition hover:text-gray-500/75 ml-4"
-                to="/productos"
-              >
-                Productos
-              </Link>
-            </li>
-
-            <li className="p-2">
-              <Link
-                className=" text-white transition hover:text-gray-500/75  ml-4"
-                to="/nosotros"
-              >
-                Nosotros
-              </Link>
-            </li>
-
-            {/* IF ADMIN */}
-            {user && user.rol === "Admin" ? (
-              <li>
-                <Link
-                  className="text-white transition hover:text-gray-500/75  ml-5"
-                  to="/admin"
-                >
-                  Administrador
-                </Link>
-              </li>
-            ) : null}
-
-            {/* IF CLIENT */}
-            {user ? (
-              <ul className="">
-                <li className="p-2">
-                  <UserModalMovil />
-                </li>
-
-                <li className="p-2">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md  border border-transparent bg-red-600 px-4 py-2 text-base  text-white shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xs:text-xs"
-                    onClick={(e) => setOpen(true)}
-                  >
-                    Cerrar Sesion
-                  </button>
-                </li>
-              </ul>
-            ) : (
-              <ul className="">
-                <li className="p-2">
-                  <Link
-                    className="text-white transition hover:text-gray-500/75 ml-4"
-                    to="/login"
-                  >
-                    Login
-                  </Link>
-                </li>
-
-                <li className="mt-4 p-2">
-                  <Link
-                    className="text-white transition hover:text-gray-500/75 ml-4 mt-6"
-                    to="/register"
-                  >
-                    Register
-                  </Link>
-                </li>
-              </ul>
-            )}
-          </ul>
-        </div>
+        <NavBarMobile
+          showMenu={showMenu}
+          toggleAdminMenu={toggleAdminMenu}
+          showAdminMenu={showAdminMenu}
+          setOpen={setOpen}
+          toggleMenu={toggleMenu}
+        />
       </header>
       {/* modal logout */}
-
-      <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={setOpen}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              >
-                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-gray-700 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                  <div>
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                      <ArrowLeftOnRectangleIcon
-                        className="h-6 w-6 text-gray-600"
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <div className="mt-3 text-center sm:mt-5">
-                      <Dialog.Title
-                        as="h3"
-                        className="text-lg font-medium leading-6 text-white"
-                      >
-                        Seguro quieres salir?
-                      </Dialog.Title>
-                    </div>
-                  </div>
-                  <div className="mt-5 sm:mt-6 flex items-center justify-center">
-                    <Link
-                      to="/"
-                      type="button"
-                      className="inline-flex justify-center rounded-md m-1 border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none sm:text-sm"
-                      onClick={logout}
-                    >
-                      Cerrar Sesion
-                    </Link>
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border m-1 border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none sm:text-sm"
-                      onClick={(e) => setOpen(false)}
-                    >
-                      Cancelar
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
+      <ModalLogOut setOpen={setOpen} logout={logout} open={open} />
     </div>
   );
 };

@@ -69,8 +69,9 @@ const ProductDetail = () => {
                   </p>
                 </div>
 
-                <div className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white">
+                <div className="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase  text-center tracking-wide text-white">
                   <button
+                    className="focus:outline-none hover:outline-none border-none"
                     type="button"
                     onClick={() => {
                       addToCart(product);
@@ -89,7 +90,7 @@ const ProductDetail = () => {
                 <div
                   className="w-full rounded border
                   border-green-900 bg-green-900 px-6 py-3 text-sm font-bold
-                  uppercase"
+                  uppercase text-center"
                 >
                   <Link type="button" to="/carrito">
                     <p className="text-center text-white">Ir al carrito</p>
@@ -98,7 +99,7 @@ const ProductDetail = () => {
                 <div
                   className="w-full rounded border
                   border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold
-                  uppercase tracking-wide"
+                  uppercase tracking-wide text-center"
                 >
                   <Link type="button" to="/productos">
                     <p className="text-center ">Volver</p>
