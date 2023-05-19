@@ -190,6 +190,7 @@ const NavBar = () => {
 
             <div className="block flex md:hidden">
               <Link
+                onClick={toggleMenu}
                 className=" mt-4 mr-2 text-white hover:text-white "
                 to="/carrito"
               >
