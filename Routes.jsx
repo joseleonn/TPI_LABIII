@@ -17,6 +17,9 @@ import ShoppingCartHoc from "./src/hocs/ShoppingCartHoc/ShoppingCartHoc";
 import AdminDashboardProducts from "./src/hocs/Admin/AdminDashboardProducts";
 import AdminDashboardUsers from "./src/hocs/Admin/AdminDashboardUsers";
 import Layout from "./src/hocs/Layout/Layout";
+import Checkout from "./src/hocs/Checkout/Checkout";
+import Confirmation from "./src/components/Checkout/Confirmation";
+import Error from "./src/components/Checkout/Error";
 function RoutesPath() {
   const { user } = UserAuth();
 
@@ -38,6 +41,9 @@ function RoutesPath() {
             element={<ProductsDetails />}
           />
           <Route path="/carrito" element={<ShoppingCartHoc />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/confirmacion" element={<Confirmation />} />
+          <Route path="/error" element={<Error />} />
 
           {/* ADMIN ROUTES */}
           {user && user.rol === "Admin" ? (

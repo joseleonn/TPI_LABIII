@@ -3,6 +3,7 @@ import { CartUseContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import SumAndRestProduct from "./SumAndRestProduct";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import FormCheckout from "../Checkout/FormCheckout";
 const ShoppingCart = () => {
   const { cart, setCart } = CartUseContext();
   const [deleteId, setDeleteId] = useState();
@@ -134,12 +135,12 @@ const ShoppingCart = () => {
                       </div> */}
 
                       <div className="flex justify-end">
-                        <a
-                          href="#"
+                        <Link
+                          to="/checkout"
                           className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                         >
                           Checkout
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
