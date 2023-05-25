@@ -6,7 +6,7 @@ let functionGenerarID =
   "http://127.0.0.1:5001/tpilab33/us-central1/crearIdMdPp";
 
 const FormCheckout = () => {
-  const { cart } = CartUseContext();
+  const { cart, addCartDB } = CartUseContext();
   const { user } = UserAuth();
 
   const payWhitMercadoPago = async () => {
@@ -27,7 +27,10 @@ const FormCheckout = () => {
       console.log(request);
       if (request.data) {
         console.log("recibido");
-        window.location.href = request.data.url
+        addCartDB(cart);
+        setTimeout(() => {
+          window.location.href = request.data.url;
+        }, 4000);
       } else {
         console.log("hubo un error con mercado pago");
       }
@@ -37,9 +40,14 @@ const FormCheckout = () => {
   };
 
   return (
-    <div>
+    <div className="">
       {" "}
-      <button onClick={payWhitMercadoPago}>Pagar con Mercado Pago</button>
+      <button
+        onClick={payWhitMercadoPago}
+        className="bg-blue-500 text-white w-full h-full"
+      >
+        Pagar con Mercado Pago
+      </button>
     </div>
   );
 };

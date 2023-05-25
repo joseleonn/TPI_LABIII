@@ -20,6 +20,7 @@ import Layout from "./src/hocs/Layout/Layout";
 import Checkout from "./src/hocs/Checkout/Checkout";
 import Confirmation from "./src/components/Checkout/Confirmation";
 import Error from "./src/components/Checkout/Error";
+import MyPurchases from "./src/hocs/MyPurchases/MyPurchases";
 function RoutesPath() {
   const { user } = UserAuth();
 
@@ -44,6 +45,13 @@ function RoutesPath() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/confirmacion" element={<Confirmation />} />
           <Route path="/error" element={<Error />} />
+
+          {user ? (
+            <>
+              {" "}
+              <Route path="/miscompras" element={<MyPurchases />} />
+            </>
+          ) : null}
 
           {/* ADMIN ROUTES */}
           {user && user.rol === "Admin" ? (

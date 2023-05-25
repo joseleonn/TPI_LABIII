@@ -49,6 +49,18 @@ const NavBarMobile = ({
             </Link>
           </li>
 
+          {user ? (
+            <li className="p-2">
+              <Link
+                className=" text-white transition hover:text-gray-500/75  ml-4"
+                to="/miscompras"
+                onClick={toggleMenu}
+              >
+                Mis Compras
+              </Link>
+            </li>
+          ) : null}
+
           {/* IF ADMIN */}
           {user && user.rol === "Admin" ? (
             <li className="ml-5">

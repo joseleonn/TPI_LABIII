@@ -104,6 +104,17 @@ const NavBar = () => {
                       Nosotros
                     </Link>
                   </li>
+
+                  {user ? (
+                    <li>
+                      <Link
+                        className="text-white transition hover:text-gray-500/75"
+                        to="/miscompras"
+                      >
+                        Mis Compras
+                      </Link>
+                    </li>
+                  ) : null}
                   {user && user.rol === "Admin" ? (
                     <li className={`${showAdminMenu ? "mt-24 " : ""} `}>
                       <Link

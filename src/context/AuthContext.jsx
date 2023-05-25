@@ -46,7 +46,7 @@ export const AuthContextProvider = ({ children }) => {
   function setUserWithFirebaseAndRol(user) {
     getRol(user.uid).then((rol) => {
       const userData = {
-        uid: user.id,
+        uid: user.uid,
         email: user.email,
         rol: rol,
       };
