@@ -50,9 +50,9 @@ const NavBar = () => {
     };
   }, []);
   return (
-    <div>
-      <header aria-label="Site Header" className="bg-transparent m-0">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
+    <>
+      <header aria-label="Site Header" className="bg-transparent ">
+        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8  ">
           <div
             className={`flex h-16 items-center justify-between fixed inset-0 z-10  ${
               scrolled
@@ -234,7 +234,7 @@ const NavBar = () => {
       </header>
       {/* modal logout */}
       <ModalLogOut setOpen={setOpen} logout={logout} open={open} />
-    </div>
+    </>
   );
 };
 

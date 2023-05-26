@@ -1,5 +1,11 @@
+import HeaderAboutUs from "../../components/HeaderAboutUs/HeaderAboutUs";
+
 const AboutUs = () => {
-  return <></>;
+  return (
+    <>
+      <HeaderAboutUs />
+    </>
+  );
 };
 
 export default AboutUs;

@@ -84,35 +84,29 @@ const navigation = {
     },
   ],
 };
-function Header() {
+function HeaderAboutUs() {
   return (
-    <header className="h-screen flex flex-col">
-      <div
-        id="top"
-        className="relative px-6 lg:px-8  header shadow-xl shadow-black	 flex-grow"
-      >
-        <div className=" flex flex-col mt-20 ">
-          <div className="flex flex-col ">
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-7xl text-white h-10 mt-20 lg:mt-10">
-              <Typewriter
-                words={["Hola!", "Explora nuestra tienda ya!"]}
-                loop={0}
-                cursor
-                cursorStyle="_"
-                typeSpeed={120}
-                deleteSpeed={50}
-                delaySpeed={1000}
-                // onLoopDone={handleDone}
-                // onType={handleType}
-              />
-            </h1>
-            <div className=" mt-32 pb-8 ">
-              <p className="mt-16 mb-10 text-sm max-w-3xl leading-8 text-gray-400 sm:text-l  mb-16">
-                Descubre nuestra amplia selección de productos a precios
-                increíbles, aprovecha nuestras promociones exclusivas y disfruta
-                de envíos rápidos y seguros.
+    <main>
+      <div className="relative px-6 lg:px-8 text-white">
+        <div className="mx-auto max-w-full xl:mx-12 xl:pt-32 xl:pb-40 lg:pt-40 lg:pb-40 pt-24 pb-12 ">
+          <div>
+            <div>
+              <h1 className="text-4xl font-semibold tracking-tight pb-8  sm:text-7xl">
+                Sobre Nosotros
+              </h1>
+              <p className="mt-6 text-2xl leading-10 text-gray-400 max-w-5xl">
+                Indumentaria21 es una empresa de ropa con sede en la hermosa
+                ciudad de Rosario. Nos enorgullece ser una empresa pequeña y
+                local que se dedica a ofrecer prendas de alta calidad y estilo a
+                nuestros clientes. En Indumentaria21, valoramos la autenticidad
+                y la individualidad de cada persona. Nos esforzamos por ofrecer
+                prendas únicas y exclusivas que reflejen la personalidad y el
+                estilo de nuestros clientes. Nuestro catálogo está
+                cuidadosamente seleccionado para garantizar que cada prenda
+                cumpla con nuestros estándares de calidad y esté alineada con
+                las últimas tendencias de moda.
               </p>
-              <div className="absolute left-0 flex space-x-6  mx-6 lg:mt-10   ">
+              <div className="absolute bottom-0 left-0 flex space-x-6 xl:mx-20 mx-6">
                 {navigation.social.map((item) => (
                   <a
                     key={item.name}
@@ -128,8 +122,8 @@ function Header() {
           </div>
         </div>
       </div>
-    </header>
+    </main>
   );
 }
 
-export default Header;
+export default HeaderAboutUs;

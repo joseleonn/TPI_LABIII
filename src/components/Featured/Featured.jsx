@@ -1,18 +1,12 @@
 const Featured = () => {
   return (
-    <div className="mt-4 sm: mt-32 bg-transparent">
+    <div className="mt-4 sm: mt-40 bg-transparent ">
       <section>
         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <header className="text-center">
             <h2 className="text-xl font-bold text-white sm:text-3xl">
               Nueva Coleccion
             </h2>
-
-            <p className="max-w-md mx-auto mt-4 text-gray-500">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
-              praesentium cumque iure dicta incidunt est ipsam, officia dolor
-              fugit natus?
-            </p>
           </header>
 
           <ul className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
