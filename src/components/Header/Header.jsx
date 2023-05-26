@@ -87,7 +87,7 @@ const navigation = {
 function Header() {
   return (
     <main>
-      <div id="top" className="relative px-6 lg:px-8">
+      <div id="top" className="relative px-6 lg:px-8 h-full header shadow-xl">
         <div className="mx-auto max-w-full xl:mx-12 xl:pt-40 xl:pb-64 lg:pt-40 lg:pb-48 pt-24 pb-12  ">
           <div>
             <div>
@@ -104,29 +104,25 @@ function Header() {
                   // onType={handleType}
                 />
               </h1>
-              <p className="mt-16 text-l max-w-3xl leading-8 text-gray-500 ">
-                Descubre nuestra amplia selección de productos a precios
-                increíbles, aprovecha nuestras promociones exclusivas y disfruta
-                de envíos rápidos y seguros.
-              </p>
-              <div className="absolute  left-0 flex space-x-6 xl:mx-20 mx-6 mt-10">
-                {navigation.social.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-gray-400 hover:text-gray-800"
-                  >
-                    <span className="sr-only">{item.name}</span>
-                    <item.icon className="h-8 w-8" aria-hidden="true" />
-                  </a>
-                ))}
+              <div className="">
+                <p className="mt-16 mb-10 text-sm max-w-3xl leading-8 text-gray-400 sm:text-l max-w-2xl ">
+                  Descubre nuestra amplia selección de productos a precios
+                  increíbles, aprovecha nuestras promociones exclusivas y
+                  disfruta de envíos rápidos y seguros.
+                </p>
+                <div className="absolute  left-0 flex space-x-6 xl:mx-20 mx-6 lg:mt-10  ">
+                  {navigation.social.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="text-gray-400 hover:text-gray-800"
+                    >
+                      <span className="sr-only">{item.name}</span>
+                      <item.icon className="h-8 w-8" aria-hidden="true" />
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="absolute inset-x-0 top-[calc(100%-20rem)] -z-10 transform-gpu overflow-hidden bg-white blur-lg lg:top-[calc(100%-45rem)] sm:top-[calc(100%-30rem)]">
-              <img
-                src="https://bafybeicgamofiuvkc6wjxl4wwzzh6pdovhcvvyc2gw5verruiolnykzz3i.ipfs.w3s.link/bbub3.jpg"
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
         </div>

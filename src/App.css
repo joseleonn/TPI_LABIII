@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.header {
+  background-image: url("https://bafybeibmcm2tw6w4nsuwjgmyli2eujjvkcmv6qepa3lwn3lhionjdmua2i.ipfs.w3s.link/gFQIrs5IYW6.jpg");
+  background-size: cover;
+  background-position: center;
+}
