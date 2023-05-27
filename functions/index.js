@@ -2,7 +2,7 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 // const axios = require("axios");
 const cors = require("cors")({
-  origin: ["https://localhost:5001", "http://localhost:5173"],
+  origin: ["https://localhost:5001", "https://tpi-labiii-joseleonn.vercel.app"],
   methods: ["POST"],
   credentials: true,
 });
@@ -34,9 +34,9 @@ exports.crearIdMdPp = functions.https.onRequest((req, res) => {
     const preference = {
       items: productosEnviar,
       back_urls: {
-        success: "http://localhost:5173/confirmacion",
-        failure: "http://localhost:5173/error",
-        pending: "http://localhost:5173/",
+        success: "https://tpi-labiii-joseleonn.vercel.app/confirmacion",
+        failure: "https://tpi-labiii-joseleonn.vercel.app/error",
+        pending: "https://tpi-labiii-joseleonn.vercel.app/",
       },
       auto_return: "approved",
     };
@@ -45,7 +45,7 @@ exports.crearIdMdPp = functions.https.onRequest((req, res) => {
         .create(preference)
         .then((response) => {
           console.log("REDIRECT BACKEND: ", response.body);
-          res.set("Access-Control-Allow-Origin", "http://localhost:5173");
+          res.set("Access-Control-Allow-Origin", "https://tpi-labiii-joseleonn.vercel.app");
           res.set("Access-Control-Allow-Methods", "POST");
           res.set("Access-Control-Allow-Headers", "Content-Type");
           res.set("Access-Control-Max-Age", "3600");
@@ -116,7 +116,7 @@ exports.crearPagoMP = functions.https.onRequest((req, res) => {
                       .then(() => {
                         res.set(
                             "Access-Control-Allow-Origin",
-                            "http://localhost:5173",
+                            "https://tpi-labiii-joseleonn.vercel.app",
                         );
 
                         res.set("Access-Control-Allow-Methods", "POST");
