@@ -23,10 +23,10 @@ const ShoppingCart = () => {
     setCart(newCart);
   };
   return (
-    <div className="">
-      <section className="flex justify-center mt-20 ">
-        <div className="flex justify-center max-w-xl">
-          <div className="">
+    <div>
+      <section>
+        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 shadow-xl shadow-black">
+          <div className="mx-auto max-w-3xl mt-16">
             <header className="text-center">
               <h1 className="text-xl font-bold text-white sm:text-3xl">
                 Tu Carrito
@@ -36,7 +36,7 @@ const ShoppingCart = () => {
               <>
                 {" "}
                 <div className="mt-8">
-                  <ul className=" bg-white rounded-md p-4 m-4">
+                  <ul className=" bg-white rounded-md p-4 ">
                     {cart?.map((product) => (
                       <li
                         className="flex flex-wrap justify-between "
@@ -61,8 +61,8 @@ const ShoppingCart = () => {
                             </dl>
                           </div>
 
-                          <div className="flex flex-1 items-center justify-end gap-2 text-black ">
-                            <div className="flex text-black ">
+                          <div className="flex flex-1 items-center justify-end gap-2 text-black">
+                            <div className="flex text-black">
                               <SumAndRestProduct
                                 quanty={product.quanty}
                                 product={product}
@@ -72,14 +72,14 @@ const ShoppingCart = () => {
                             <div>
                               <button
                                 onClick={() => deleteProductCart(product.id)}
-                                className=" bg-white"
+                                className="text-gray-600 transition hover:border-white text-black bg-white"
                               >
                                 <TrashIcon className="w-6 h-6 text-red-600" />
                               </button>
                             </div>
                           </div>
 
-                          <div className="divide-x-4 p-2 font-bold text-black ">
+                          <div className="divide-x-4 p-2 font-bold text-black">
                             $ {product.precio * product.quanty}
                           </div>
                         </div>
