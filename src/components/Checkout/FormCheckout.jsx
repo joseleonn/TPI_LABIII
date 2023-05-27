@@ -2,6 +2,9 @@ import axios from "axios";
 import { UserAuth } from "../../context/AuthContext";
 import { CartUseContext } from "../../context/CartContext";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 let functionGenerarID =
   "http://127.0.0.1:5001/tpilab33/us-central1/crearIdMdPp";
 
@@ -10,7 +13,31 @@ const FormCheckout = () => {
   const { user } = UserAuth();
 
   const payWhitMercadoPago = async () => {
-    console.log(JSON.stringify(cart));
+    const messageError = () => {
+      toast.error("Debe estar registrado para poder pagar!", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    };
+
+    const messageSuccess = () => {
+      toast.success("Llevandote a Mercado Pago!", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    };
 
     if (user) {
       const request = await axios.post(
@@ -26,7 +53,7 @@ const FormCheckout = () => {
       );
       console.log(request);
       if (request.data) {
-        console.log("recibido");
+        messageSuccess();
         addCartDB(cart);
         setTimeout(() => {
           window.location.href = request.data.url;
@@ -35,6 +62,8 @@ const FormCheckout = () => {
         console.log("hubo un error con mercado pago");
       }
     } else {
+      messageError();
+
       console.log("debe registrarse para pagar");
     }
   };
@@ -48,6 +77,7 @@ const FormCheckout = () => {
       >
         Pagar con Mercado Pago
       </button>
+      <ToastContainer />
     </div>
   );
 };

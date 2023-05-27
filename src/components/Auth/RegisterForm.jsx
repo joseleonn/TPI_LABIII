@@ -6,33 +6,70 @@ import { useNavigate } from "react-router-dom";
 import app, { auth } from "../../firebase/Credentials";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import Alerts from "./Alerts";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const firestore = getFirestore(app);
+
 const RegisterFormFire = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repassword, setRePassword] = useState("");
+
   const [rol, setRol] = useState("Cliente");
   const [error, setError] = useState();
   const navigate = useNavigate();
 
+  const messageError = () => {
+    toast.error("La contraseña no coincide!", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  const messageSuccess = () => {
+    toast.success("Registrado!", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    createUserWithEmailAndPassword(auth, email, password, rol)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
+    if (password === repassword) {
+      messageSuccess();
+      createUserWithEmailAndPassword(auth, email, password, rol)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
 
-        // Agrega al usuario a la BASE DE DATOS y le asigna el rol
-        const docuRef = doc(firestore, `Usuarios/${user.uid}`);
-        setDoc(docuRef, { correo: email, rol: rol });
-        // ...
-        navigate("/");
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
+          // Agrega al usuario a la BASE DE DATOS y le asigna el rol
+          const docuRef = doc(firestore, `Usuarios/${user.uid}`);
+          setDoc(docuRef, { correo: email, rol: rol });
+          // ...
+
+          navigate("/");
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    } else {
+      messageError();
+    }
   };
+
   return (
     <div>
       <section className=" bg-gray-800">
@@ -104,6 +141,7 @@ const RegisterFormFire = () => {
                   Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
                 </p>
               </div>
+              <ToastContainer />
 
               {error && <Alerts message={error} />}
               <form
@@ -161,6 +199,9 @@ const RegisterFormFire = () => {
                     type="password"
                     id="PasswordConfirmation"
                     name="confirm_password"
+                    value={repassword}
+                    onChange={(e) => setRePassword(e.target.value)}
+                    required
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
                   />
                 </div>

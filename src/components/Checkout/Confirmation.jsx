@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { CartUseContext } from "../../context/CartContext";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 let functionPagarMP = "http://127.0.0.1:5001/tpilab33/us-central1/crearPagoMP";
 
 const Confirmation = () => {
@@ -12,6 +14,31 @@ const Confirmation = () => {
   const { cart, getCartItems, deleteCartDB } = CartUseContext();
   const [idClient, setIdClient] = useState(null);
 
+  const messageSuccess = () => {
+    toast.success("Gracias por comprar!", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  const messageError = () => {
+    toast.error("Error en la compra!", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
@@ -49,12 +76,13 @@ const Confirmation = () => {
             .then((response) => {
               if (response.data) {
                 setSuccesBuy("comprado");
+                messageSuccess();
                 deleteCartDB();
                 setTimeout(() => {
                   navigate("/miscompras");
                 }, 4000);
               } else {
-                console.log("No se pudo comprar");
+                messageError();
                 setSuccesBuy("error");
               }
             })
@@ -71,6 +99,8 @@ const Confirmation = () => {
 
   return (
     <div className="flex flex-col justify-center items-center mt-20 text-white">
+      <ToastContainer />
+
       <h1>Confirmacion del pedido</h1>
 
       <div className="flex ">
