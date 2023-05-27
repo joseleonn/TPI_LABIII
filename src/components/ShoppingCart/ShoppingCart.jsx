@@ -61,7 +61,7 @@ const ShoppingCart = () => {
                             </dl>
                           </div>
 
-                          <div className="flex flex-1 items-center justify-end gap-2 ">
+                          <div className=" ">
                             <div className="flex">
                               <SumAndRestProduct
                                 quanty={product.quanty}
@@ -72,7 +72,7 @@ const ShoppingCart = () => {
                             <div>
                               <button
                                 onClick={() => deleteProductCart(product.id)}
-                                className="text-gray-600 transition hover:border-white"
+                                className=" bg-white"
                               >
                                 <TrashIcon className="w-6 h-6 text-red-600" />
                               </button>
