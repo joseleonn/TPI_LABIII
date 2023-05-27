@@ -61,8 +61,8 @@ const ShoppingCart = () => {
                             </dl>
                           </div>
 
-                          <div className=" ">
-                            <div className="flex">
+                          <div className="flex flex-1 items-center justify-end gap-2 text-black ">
+                            <div className="flex text-black ">
                               <SumAndRestProduct
                                 quanty={product.quanty}
                                 product={product}
@@ -79,7 +79,7 @@ const ShoppingCart = () => {
                             </div>
                           </div>
 
-                          <div className="divide-x-4 p-2 font-bold">
+                          <div className="divide-x-4 p-2 font-bold text-black ">
                             $ {product.precio * product.quanty}
                           </div>
                         </div>
