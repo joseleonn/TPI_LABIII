@@ -84,23 +84,37 @@ const navigation = {
     },
   ],
 };
-function HeaderAboutUs() {
+function Header() {
   return (
     <main>
-      <div className="relative px-6 lg:px-8 text-white h-screen">
-        <div className="mx-auto max-w-full xl:mx-12 xl:pt-32 xl:pb-40 lg:pt-40 lg:pb-40 pt-24 pb-12 ">
+      <div className="relative px-6 lg:px-8">
+        <div className="mx-auto max-w-full xl:mx-12 xl:pt-40 xl:pb-64 lg:pt-40 lg:pb-48 pt-24 pb-12  ">
           <div>
-            <div className="">
-              <h1 className="text-4xl font-semibold tracking-tight pb-8  sm:text-7xl flex mt-16 ">
-                Sobre Nosotros
+            <div>
+              <h1 className="text-4xl font-semibold tracking-tight pb-16  sm:text-7xl text-white">
+                <Typewriter
+                  words={["Hola!", "Explora nuestra tienda ya!"]}
+                  loop={0}
+                  cursor
+                  cursorStyle="_"
+                  typeSpeed={120}
+                  deleteSpeed={50}
+                  delaySpeed={1000}
+                  // onLoopDone={handleDone}
+                  // onType={handleType}
+                />
               </h1>
-
-              <div className="absolute  bottom-4 left-0 flex space-x-6 xl:mx-20 mx-6">
+              <p className="mt-16 text-l max-w-3xl leading-8 text-gray-500 ">
+                Descubre nuestra amplia selección de productos a precios
+                increíbles, aprovecha nuestras promociones exclusivas y disfruta
+                de envíos rápidos y seguros.
+              </p>
+              <div className="absolute  left-0 flex space-x-6 xl:mx-20 mx-6 mt-10">
                 {navigation.social.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-gray-400 hover:text-gray-200"
+                    className="text-gray-400 hover:text-gray-800"
                   >
                     <span className="sr-only">{item.name}</span>
                     <item.icon className="h-8 w-8" aria-hidden="true" />
@@ -108,25 +122,17 @@ function HeaderAboutUs() {
                 ))}
               </div>
             </div>
+            <div className="absolute inset-x-0 top-[calc(100%-20rem)] -z-10 transform-gpu overflow-hidden bg-white blur-lg lg:top-[calc(100%-45rem)] sm:top-[calc(100%-30rem)]">
+              <img
+                src="https://bafybeicgamofiuvkc6wjxl4wwzzh6pdovhcvvyc2gw5verruiolnykzz3i.ipfs.w3s.link/bbub3.jpg"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="flex flex-col items-center text-justify pt-20 text-white ">
-        <h1 className=" font-bold">Indumentaria21</h1>
-        <p className="mt-10 text-xl leading-8 text-gray-200 max-w-5xl m-8 ">
-          Somos una empresa de ropa con sede en la hermosa ciudad de Rosario.
-          Nos enorgullece ser una empresa pequeña y local que se dedica a
-          ofrecer prendas de alta calidad y estilo a nuestros clientes. En
-          Indumentaria21, valoramos la autenticidad y la individualidad de cada
-          persona. Nos esforzamos por ofrecer prendas únicas y exclusivas que
-          reflejen la personalidad y el estilo de nuestros clientes. Nuestro
-          catálogo está cuidadosamente seleccionado para garantizar que cada
-          prenda cumpla con nuestros estándares de calidad y esté alineada con
-          las últimas tendencias de moda.
-        </p>
       </div>
     </main>
   );
 }
 
-export default HeaderAboutUs;
+export default Header;

@@ -37,7 +37,7 @@ const ProductList = () => {
 
           <ul className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-4 ">
             {data.map((product) => (
-              <li className="shadow-xl shadow-black" key={product.id}>
+              <li className="" key={product.id}>
                 <Link
                   to={`/detalleproducto/${product.id}`}
                   className="block overflow-hidden group rounded-md "
@@ -51,33 +51,32 @@ const ProductList = () => {
                     />
                   </div>
 
-                  <div className="relative pt-3 bg-white p-1 ">
-                    <h3 className="text-xl text-gray-800">{product.nombre}</h3>
+                  <div className="relative pt-3 bg-gray-700 p-1">
+                    <h3 className="text-xl text-white">{product.nombre}</h3>
 
                     <p className="mt-2">
                       <span className="sr-only"> Regular Price </span>
 
-                      <span className="tracking-wider text-gray-800 text-xl">
+                      <span className="tracking-wider text-white text-xl">
                         $ {product.precio}
                       </span>
                     </p>
                   </div>
                 </Link>
-                <div className="flex justify-end">
-                  <button
-                    onClick={() => {
-                      addToCart(product);
-                      handlerAddCheck(product.id);
-                    }}
-                    className="bg-transparent m-2 -mt-16 relative border border-white focus:outline-none hover:border-white"
-                  >
-                    {addCheckMap[product.id] ? (
-                      <CheckIcon className="h-6 w-6 text-gray-800" />
-                    ) : (
-                      <ShoppingCartIcon className="h-6 w-6 text-gray-800" />
-                    )}
-                  </button>
-                </div>
+
+                <button
+                  onClick={() => {
+                    addToCart(product);
+                    handlerAddCheck(product.id);
+                  }}
+                  className="bg-transparent flex justify-end ml-52 -mt-14 relative border border-white focus:outline-none hover:border-white"
+                >
+                  {addCheckMap[product.id] ? (
+                    <CheckIcon className="h-6 w-6 text-white" />
+                  ) : (
+                    <ShoppingCartIcon className="h-6 w-6 text-white" />
+                  )}
+                </button>
               </li>
             ))}
           </ul>
