@@ -70,9 +70,7 @@ const Confirmation = () => {
             .post(functionPagarMP, JSON.stringify(order), {
               headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://tpi-labiii.vercel.app",
               },
-              withCredentials: true,
             })
             .then((response) => {
               if (response.data) {
