@@ -34,9 +34,9 @@ exports.crearIdMdPp = functions.https.onRequest((req, res) => {
     const preference = {
       items: productosEnviar,
       back_urls: {
-        success: "https://tpi-labiii-git-main-joseleonn.vercel.app/confirmacion",
-        failure: "https://tpi-labiii-git-main-joseleonn.vercel.app/error",
-        pending: "https://tpi-labiii-git-main-joseleonn.vercel.app/",
+        success: "https://tpi-labiii.vercel.app/confirmacion",
+        failure: "https://tpi-labiii.vercel.app/error",
+        pending: "https://tpi-labiii.vercel.app",
       },
       auto_return: "approved",
     };
@@ -45,7 +45,7 @@ exports.crearIdMdPp = functions.https.onRequest((req, res) => {
         .create(preference)
         .then((response) => {
           console.log("REDIRECT BACKEND: ", response.body);
-          res.set("Access-Control-Allow-Origin", "https://tpi-labiii-git-main-joseleonn.vercel.app");
+          res.set("Access-Control-Allow-Origin", "https://tpi-labiii.vercel.app");
           res.set("Access-Control-Allow-Methods", "POST");
           res.set("Access-Control-Allow-Headers", "Content-Type");
           res.set("Access-Control-Max-Age", "3600");
@@ -116,7 +116,7 @@ exports.crearPagoMP = functions.https.onRequest((req, res) => {
                       .then(() => {
                         res.set(
                             "Access-Control-Allow-Origin",
-                            "https://tpi-labiii-git-main-joseleonn.vercel.app",
+                            "https://tpi-labiii.vercel.app",
                         );
 
                         res.set("Access-Control-Allow-Methods", "POST");

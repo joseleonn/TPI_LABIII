@@ -53,7 +53,7 @@ const FormCheckout = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "https://tpi-labiii-git-main-joseleonn.vercel.app",
+            "Access-Control-Allow-Origin": "https://tpi-labiii.vercel.app",
           },
           withCredentials: true,
         }
