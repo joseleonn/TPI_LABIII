@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 let functionGenerarID =
-  "https://us-central1-tpilab33.cloudfunctions.net/crearIdMdPp";
+  "https://us-central1-tpilab33.cloudfunctions.net/createIdMdPp";
 
 const FormCheckout = () => {
   const { cart, addCartDB } = CartUseContext();
