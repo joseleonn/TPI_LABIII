@@ -2,7 +2,7 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 // const axios = require("axios");
 const cors = require("cors")({
-  origin: ["https://localhost:5001", "https://tpi-labiii-git-main-joseleonn.vercel.app"],
+  origin: ["https://localhost:5001", "https://tpi-labiii.vercel.app"],
   methods: ["POST"],
   credentials: true,
 });
