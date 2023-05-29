@@ -65,12 +65,14 @@ const Confirmation = () => {
           cartDB: cartDB,
         };
         console.log(order);
-        if (order.cartDB && order.cartDB.length > 0 && cartDB) {
+        if (order.cartDB && order.cartDB.length > 0 ) {
           axios
             .post(functionPagarMP, JSON.stringify(order), {
               headers: {
                 "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://tpi-labiii.vercel.app",
               },
+              withCredentials: true,
             })
             .then((response) => {
               if (response.data) {
