@@ -36,7 +36,7 @@ exports.crearIdMdPp = functions.https.onRequest((req, res) => {
       back_urls: {
         success: "https://tpi-labiii.vercel.app/confirmacion",
         failure: "https://tpi-labiii.vercel.app/error",
-        pending: "https://tpi-labiii.vercel.app",
+        pending: "https://tpi-labiii.vercel.app/",
       },
       auto_return: "approved",
     };
