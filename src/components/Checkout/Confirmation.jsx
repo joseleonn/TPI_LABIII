@@ -6,7 +6,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 let functionPagarMP =
-  "https://us-central1-tpilab33.cloudfunctions.net/crearPagoMP";
+  "http://127.0.0.1:5001/tpilab33/us-central1/crearPagoMP";
 
 const Confirmation = () => {
   const [succesBuy, setSuccesBuy] = useState("esperando");
