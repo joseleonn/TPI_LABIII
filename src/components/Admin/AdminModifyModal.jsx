@@ -276,10 +276,10 @@ const AdminModifyModal = ({ productId }) => {
                       </form>
                     </div>
                   </div>
-                  <div className="  flex items-center justify-center -ml-10">
+                  <div className="  flex items-center justify-center ">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-lg px-5 py-3 border -mt-1 border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none sm:text-sm"
+                      className="inline-flex justify-center rounded-lg px-5 py-3 text-sm border -mt-1 border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none sm:text-sm"
                       onClick={(e) => setOpen(false)}
                     >
                       Cancelar

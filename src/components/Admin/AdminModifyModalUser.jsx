@@ -61,11 +61,10 @@ const AdminModifyModalUser = ({ userId, userEmail }) => {
 
   return (
     <div>
-      <div>
-        <div className="" onClick={(e) => setOpen(true)}>
-          <p className="hover:text-gray-500/75">Modificar rol</p>
-        </div>
+      <div className="" onClick={(e) => setOpen(true)}>
+        <p className="hover:text-gray-500/75">Modificar rol</p>
       </div>
+
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setOpen}>
           <Transition.Child

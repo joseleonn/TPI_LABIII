@@ -60,10 +60,9 @@ const NavBar = () => {
                 : "bg-transparent"
             }`}
           >
-            <div className="md:flex md:items-center md:gap-12 p-8 ">
+            <div className="md:flex  p-8 ">
               <Link className="block text-teal-600" to="/">
-                <span className="sr-only">Home</span>
-                <p className="font-bold text-white">INDUMENTARIA 21</p>
+                <p className="font-bold text-white ">INDUMENTARIA 21</p>
               </Link>
             </div>
 
@@ -108,15 +107,15 @@ const NavBar = () => {
                     </li>
                   ) : null}
                   {user && user.rol === "Admin" ? (
-                    <li className={`${showAdminMenu ? "mt-24 " : ""} `}>
+                    <li className={`${showAdminMenu ? "relative " : ""} `}>
                       <Link
-                        className="text-white transition hover:text-gray-500/75 focus: outline-none"
+                        className="text-white transition hover:text-gray-500/75 focus:outline-none"
                         onClick={toggleAdminMenu}
                       >
-                        Administrador
+                        Admin
                       </Link>
                       {showAdminMenu ? (
-                        <ul className="text-white bg-gray-700 rounded-md pt-2 ">
+                        <ul className="text-white bg-gray-700 rounded-md pt-2 absolute right-0 ">
                           <Link
                             to="/admin/usuarios"
                             className="text-white transition hover:text-white focus: outline-none"
@@ -171,7 +170,7 @@ const NavBar = () => {
                     className="rounded-md  px-5 py-2.5 text-l font-medium text-gray-800 bg-gray-300 bg-opacity-50 shadow transition hover:text-gray-100/75"
                     to="/login"
                   >
-                    Login
+                    Acceder
                   </Link>
 
                   <div className="hidden sm:flex">
@@ -179,11 +178,11 @@ const NavBar = () => {
                       className="rounded-md  px-5 py-2.5 text-l font-medium text-white bg-gray-700 bg-opacity-50 shadow transition hover:text-gray-500/75"
                       to="/register"
                     >
-                      Register
+                      Registerse
                     </Link>
                   </div>
                   <Link className=" mr-2 text-white " to="/carrito">
-                    <ShoppingCartIcon className="h-8 w-8 " />
+                    <ShoppingCartIcon className="h-8 w-8 hover:text-gray-600" />
                     {cart.length > 0 ? <TotalItems /> : null}
                   </Link>
                 </div>

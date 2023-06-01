@@ -32,7 +32,7 @@ const AdminListProducts = () => {
               Productos
             </h2>
             <Link to="/agregarproducto">
-              <button className="focus:outline-none sm:text-sm">
+              <button className="bg-gray-700 border border-gray-800 shadow-md text-sm mt-4 text-white hover:text-gray-600 hover:border-gray-600 focus:outline-none">
                 Agregar Producto
               </button>
             </Link>
@@ -68,7 +68,10 @@ const AdminListProducts = () => {
                       </span>
 
                       <span className="flex -mt-6 ">
-                        <button onClick={() => selectProduct(product.id)}>
+                        <button
+                          className="bg-transparent shadow-xl border border-white text-sm mt-2 mb-2 text-white hover:text-gray-600 hover:border-gray-600 focus:outline-none"
+                          onClick={() => selectProduct(product.id)}
+                        >
                           <AdminModifyModal productId={selectedProductId} />
                         </button>
                       </span>

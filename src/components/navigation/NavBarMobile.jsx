@@ -68,7 +68,7 @@ const NavBarMobile = ({
                 className="text-white transition hover:text-gray-500/75 focus: outline-none"
                 onClick={toggleAdminMenu}
               >
-                Administrador
+                Admin
               </Link>
               {showAdminMenu ? (
                 <ul className="text-white bg-gray-800 rounded-md pt-2 ">

@@ -59,45 +59,28 @@ const AdminListUsers = () => {
     console.log(userEmail);
   };
   return (
-    <div>
+    <div className="  ">
       <section>
-        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
+        <div className=" px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <header className="mt-16">
-            <h2 className="text-xl font-bold text-white sm:text-3xl flex justify-center">
+            <h2 className="text-xl font-bold text-white sm:text-3xl flex justify-center mb-8">
               Usuarios Registrados
             </h2>
-            {/* <Link to="/agregarproducto">
-              <button className="focus:outline-none sm:text-sm">
-                Agregar Producto
-              </button>
-            </Link> */}
           </header>
-
-          <table className="min-w-full  bg-transparent text-sm ">
-            <tbody>
-              <tr>
+          <div className="overflow-auto max-w-screen">
+            <table className="w-full">
+              <ul className="flex flex-wrap  justify-center ">
                 {data.map((user) => (
-                  <td className="" key={user.id}>
-                    <Link
-                      to="#"
-                      className="block overflow-hidden group rounded-md "
-                    >
-                      <div className="relative pt-3 bg-gray-700 p-1 m-2 rounded-md">
-                        <h3 className="text-xl text-white">
-                          Email: {user.correo}
-                        </h3>
-                        <h3 className="text-xl text-white">Rol: {user.rol}</h3>
+                  <li className="md:w-1/2 w-full text-xl" key={user.id}>
+                    <Link to="#" className="rounded-md ">
+                      <div className=" pt-3 bg-gray-700 p-1 m-2 rounded-md p-4">
+                        <h3 className=" text-white">Email: {user.correo}</h3>
+                        <h3 className="text-white">Rol: {user.rol}</h3>
 
                         <div className="mt-6">
-                          {/* <span className="flex justify-start ml-28 -mb-9 ">
-                          <TrashIcon
-                            onClick={() => deleteProductHandle(user.id)}
-                            className="h-8 w-8 text-white bg-red-600 rounded-md p-1"
-                          />
-                        </span> */}
-
                           <span className="flex -mt-6 ">
                             <button
+                              className="bg-transparent border border-white text-sm mt-4 text-white hover:text-gray-600 hover:border-gray-600 focus:outline-none"
                               onClick={() => {
                                 selectUser(user.id), selectUserE(user.correo);
                               }}
@@ -111,11 +94,11 @@ const AdminListUsers = () => {
                         </div>
                       </div>
                     </Link>
-                  </td>
+                  </li>
                 ))}
-              </tr>
-            </tbody>
-          </table>
+              </ul>
+            </table>
+          </div>
         </div>
       </section>
     </div>

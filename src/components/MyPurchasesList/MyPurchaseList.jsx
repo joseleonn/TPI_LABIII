@@ -4,37 +4,23 @@ const MyPurchaseList = () => {
   const { pedidosData } = CartUseContext();
 
   return (
-    <div className="mt-14  ">
+    <div className="mt-14  w-full  ">
       <h1 className="text-center p-6 text-white">Mis Compras</h1>
-      <div className="overflow-x-auto  ">
-        <table className="min-w-full divide-y-2 divide-gray-200 bg-white  text-sm">
-          <thead className="ltr:text-left rtl:text-right ">
-            <tr>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Nro de orden
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Fecha de compra
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Productos
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Total
-              </th>
-            </tr>
-          </thead>
+      <div className=" flex justify-center rounded-md  max-w-screen w-full max-h-screen  ">
+        <ul className="flex flex-col  justify-center ">
           {pedidosData ? (
-            <tbody className=" divide-y-2 divide-gray-200">
+            <div className=" divide-y-2 divide-gray-200 ">
               {pedidosData.map((pedido) => (
-                <tr key={pedido.id} className="odd:bg-gray-50 bg-white ">
-                  <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                <li key={pedido.id} className="odd:bg-gray-50 bg-white flex ">
+                  <span className="whitespace-nowrap px-4 py-2  text-gray-700">
+                    <p>Nro de pedido</p>
                     {pedido.OrderNum}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                  </span>
+                  <span className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <p>Fecha de compra</p>
                     {new Date(pedido.Date.seconds * 1000).toLocaleDateString()}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                  </span>
+                  <span className="whitespace-nowrap px-4 py-2 text-gray-700">
                     {/* Mostrar los valores específicos dentro de pedido.Products */}
                     {pedido.Products.map((producto) => (
                       <div key={producto.id} className="flex pt-1">
@@ -46,17 +32,17 @@ const MyPurchaseList = () => {
                         </div>
                       </div>
                     ))}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    $ {pedido.Total}
-                  </td>
-                </tr>
+                  </span>
+                  <span className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <p>Total de la compra</p>$ {pedido.Total}
+                  </span>
+                </li>
               ))}
-            </tbody>
+            </div>
           ) : (
             <p className="text-white">No tienes compras realizadas</p>
           )}
-        </table>
+        </ul>
       </div>
     </div>
   );
