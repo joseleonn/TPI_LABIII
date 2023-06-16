@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { UserAuth } from "../../context/AuthContext";
 import { Typewriter } from "react-simple-typewriter";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Alerts from "./Alerts";
+import { LoadingContext } from "../../context/LoadingContext";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -13,13 +14,17 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
   const { user, handleSingIn, ResetPassword } = UserAuth();
+  const { toggleLoading } = useContext(LoadingContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    toggleLoading(true);
     try {
       await handleSingIn(email, password);
+      toggleLoading(false);
     } catch (error) {
       setError(error.message);
+      toggleLoading(false);
     }
   };
 

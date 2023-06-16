@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { getFirestore, doc, setDoc } from "firebase/firestore";
 import Alerts from "./Alerts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { LoadingContext } from "../../context/LoadingContext";
 const firestore = getFirestore(app);
 
 const RegisterFormFire = () => {
@@ -18,6 +19,7 @@ const RegisterFormFire = () => {
   const [rol, setRol] = useState("Cliente");
   const [error, setError] = useState();
   const navigate = useNavigate();
+  const { toggleLoading } = useContext(LoadingContext);
 
   const messageError = () => {
     toast.error("La contraseña no coincide!", {
@@ -47,7 +49,7 @@ const RegisterFormFire = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    toggleLoading(true);
     if (password === repassword) {
       messageSuccess();
       createUserWithEmailAndPassword(auth, email, password, rol)
@@ -59,14 +61,17 @@ const RegisterFormFire = () => {
           const docuRef = doc(firestore, `Usuarios/${user.uid}`);
           setDoc(docuRef, { correo: email, rol: rol });
           // ...
+          toggleLoading(false);
 
           navigate("/");
         })
         .catch((error) => {
           setError(error.message);
+          toggleLoading(false);
         });
     } else {
       messageError();
+      toggleLoading(false);
     }
   };
 
