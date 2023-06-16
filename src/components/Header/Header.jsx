@@ -89,7 +89,7 @@ function Header() {
     <header className="h-screen flex flex-col">
       <div
         id="top"
-        className="relative px-6 lg:px-8  header shadow-xl shadow-black	 flex-grow"
+        className="relative px-6 lg:px-8  header shadow-xl shadow-black	 flex-grow "
       >
         <div className=" flex flex-col mt-20 ">
           <div className="flex flex-col ">

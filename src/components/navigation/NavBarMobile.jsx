@@ -2,6 +2,24 @@ import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import UserModalMovil from "./UserModalMovil";
 
+const navLinks = [
+  {
+    id: 1,
+    name: "Inicio",
+    to: "/",
+  },
+  {
+    id: 2,
+    name: "Productos",
+    to: "/productos",
+  },
+  {
+    id: 3,
+    name: "Nosotros",
+    to: "/nosotros",
+  },
+];
+
 const NavBarMobile = ({
   showMenu,
   toggleAdminMenu,
@@ -19,35 +37,17 @@ const NavBarMobile = ({
         } md:hidden ml-auto max-w-max z-10 fixed inset-0 mt-16`}
       >
         <ul className="flex flex-col items-start gap-6 text-md mx-8 ml-44 bg-gray-700 rounded p-2 ">
-          <li className="p-2">
-            <Link
-              className=" text-white transition hover:text-gray-500/75  ml-4"
-              to="/"
-              onClick={toggleMenu}
-            >
-              Inicio
-            </Link>
-          </li>
-
-          <li className="p-2">
-            <Link
-              className=" text-white transition hover:text-gray-500/75 ml-4"
-              to="/productos"
-              onClick={toggleMenu}
-            >
-              Productos
-            </Link>
-          </li>
-
-          <li className="p-2">
-            <Link
-              className=" text-white transition hover:text-gray-500/75  ml-4"
-              to="/nosotros"
-              onClick={toggleMenu}
-            >
-              Nosotros
-            </Link>
-          </li>
+          {navLinks.map((navlink) => (
+            <li className="p-2" key={navlink.id}>
+              <Link
+                className="text-white transition hover:text-gray-500/75  ml-4"
+                to={navlink.to}
+                onClick={toggleMenu}
+              >
+                {navlink.name}
+              </Link>
+            </li>
+          ))}
 
           {user ? (
             <li className="p-2">

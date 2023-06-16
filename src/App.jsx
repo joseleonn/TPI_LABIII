@@ -1,17 +1,15 @@
 import "./App.css";
 import RoutesPath from "../Routes";
-import { BrowserRouter as Router } from "react-router-dom";
-import { AuthContextProvider } from "./context/AuthContext";
-import { UserAuth } from "./context/AuthContext";
-import { CartContextProvider } from "./context/CartContext";
-import Layout from "./hocs/Layout/Layout";
+
+import { ModeContext } from "./context/DarkLightModeContext";
+import { useContext } from "react";
+
 function App() {
+  const { mode } = useContext(ModeContext);
   return (
-    <AuthContextProvider>
-      <CartContextProvider>
-        <RoutesPath />
-      </CartContextProvider>
-    </AuthContextProvider>
+    <div className={`${mode === "light" && "light-theme"}`}>
+      <RoutesPath />
+    </div>
   );
 }
 

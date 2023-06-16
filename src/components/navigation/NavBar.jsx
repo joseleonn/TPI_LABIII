@@ -14,7 +14,25 @@ import TotalItems from "../ShoppingCart/TotalItems";
 import { CartUseContext } from "../../context/CartContext";
 import NavBarMobile from "./NavBarMobile";
 import ModalLogOut from "./ModalLogOut";
+import ButtonDarkLightMode from "../ButtonDarkLightMode/ButtonDarkLightMode";
 
+const navLinks = [
+  {
+    id: 1,
+    name: "Inicio",
+    to: "/",
+  },
+  {
+    id: 2,
+    name: "Productos",
+    to: "/productos",
+  },
+  {
+    id: 3,
+    name: "Nosotros",
+    to: "/nosotros",
+  },
+];
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const { user, handleLogOut } = UserAuth();
@@ -66,35 +84,19 @@ const NavBar = () => {
               </Link>
             </div>
 
-            <div className="hidden md:block ml-44">
+            <div className="hidden md:block ">
               <nav aria-label="Site Nav">
-                <ul className="flex items-center gap-12 text-xl ">
-                  <li>
-                    <Link
-                      className="text-white transition hover:text-gray-500/75"
-                      to="/"
-                    >
-                      Inicio
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      className="text-white transition hover:text-gray-500/75"
-                      to="/productos"
-                    >
-                      Productos
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      className="text-white transition hover:text-gray-500/75"
-                      to="/nosotros"
-                    >
-                      Nosotros
-                    </Link>
-                  </li>
+                <ul className="flex items-center gap-12 text-l ">
+                  {navLinks.map((navlink) => (
+                    <li key={navlink.id}>
+                      <Link
+                        className="text-white transition hover:text-gray-500/75"
+                        to={navlink.to}
+                      >
+                        {navlink.name}
+                      </Link>
+                    </li>
+                  ))}
 
                   {user ? (
                     <li>
@@ -156,6 +158,8 @@ const NavBar = () => {
                     <ShoppingCartIcon className="h-8 w-8" />
                     {cart.length > 0 ? <TotalItems /> : null}
                   </Link>
+                  <ButtonDarkLightMode />
+
                   <Link
                     className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow hover:text-red-900"
                     onClick={(e) => setOpen(true)}
@@ -185,6 +189,8 @@ const NavBar = () => {
                     <ShoppingCartIcon className="h-8 w-8 hover:text-gray-600" />
                     {cart.length > 0 ? <TotalItems /> : null}
                   </Link>
+
+                  <ButtonDarkLightMode />
                 </div>
               )}
             </div>
@@ -197,6 +203,9 @@ const NavBar = () => {
                 <ShoppingCartIcon className="h-8 w-8 transition-colors duration-300 ease-in-out hover:text-gray-400" />
                 {cart.length > 0 ? <TotalItems /> : null}
               </Link>
+              <div className="flex justify-center items-center -mr-5">
+                <ButtonDarkLightMode />
+              </div>
 
               {showMenu ? (
                 <>
