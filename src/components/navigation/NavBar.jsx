@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { useState, Fragment, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import "firebase/auth";
 import { UserAuth } from "../../context/AuthContext";
-import { Dialog, Transition } from "@headlessui/react";
 import {
   ShoppingCartIcon,
   ArrowLeftOnRectangleIcon,
@@ -16,6 +15,7 @@ import NavBarMobile from "./NavBarMobile";
 import ModalLogOut from "./ModalLogOut";
 import ButtonDarkLightMode from "../ButtonDarkLightMode/ButtonDarkLightMode";
 import { ModeContext } from "../../context/DarkLightModeContext";
+import useScroll from "./hooks/useScroll";
 
 const navLinks = [
   {
@@ -38,10 +38,9 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
   const { user, handleLogOut } = UserAuth();
   const [showMenu, setShowMenu] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { itemsQuanty, cart } = CartUseContext();
+  const { cart } = CartUseContext();
   const { mode } = useContext(ModeContext);
-
+  const { scrolled } = useScroll();
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -56,19 +55,6 @@ const NavBar = () => {
     setOpen(false);
   };
 
-  //FUNCION QUE PARA CUANDO HAGA SCROLL PARA ABAJO CAMBIE EL CSS DEL NAVBAR
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
-      setScrolled(isScrolled);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
   return (
     <div className="text-white">
       <header aria-label="Site Header" className="bg-transparent ">

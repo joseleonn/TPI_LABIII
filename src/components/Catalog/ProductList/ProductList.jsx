@@ -4,13 +4,15 @@ import { Link, useParams } from "react-router-dom";
 import { CartUseContext } from "../../../context/CartContext";
 import { CheckIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Filter from "../../Filters/Filter";
+import useFilterCategory from "./hooks/useFilterCategory";
 
 const ProductList = () => {
   //TRAEMOS LOS PRODUCTOS DESDE CONTEXT
-  const { data, addToCart } = CartUseContext();
+  const { addToCart } = CartUseContext();
   const [addCheckMap, setAddCheckMap] = useState(false);
-  const [categ, setCateg] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  //desestructuramos el filteredProducts del customhook
+  const { filteredProducts, categFunc } = useFilterCategory();
 
   //CAMBIA EL ICONO DEL CARRITO A UN CHECK MEDIANMTE UN ESTADO
   const handlerAddCheck = (productId) => {
@@ -27,26 +29,6 @@ const ProductList = () => {
       }));
     }, 1000); // Delay de 1 segundo (1000 milisegundos)
   };
-
-  //funcion para trarerme categ
-  const categFunc = (categoria) => {
-    setCateg(categoria);
-  };
-
-  //funcion para filtrar por categoria
-
-  useEffect(() => {
-    if (categ !== "") {
-      if (categ === "todos") {
-        setFilteredProducts(data);
-      } else {
-        const filter = data.filter((producto) => producto.categoria === categ);
-        setFilteredProducts(filter);
-      }
-    } else {
-      setFilteredProducts(data);
-    }
-  }, [data, categ]);
 
   return (
     <div className="">

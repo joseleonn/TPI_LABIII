@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
+//link a la API creada en firebase
 let functionGenerarID =
   "https://us-central1-tpilab33.cloudfunctions.net/crearIdMdPp";
 
@@ -77,7 +78,6 @@ const FormCheckout = () => {
 
   return (
     <div className="">
-      {" "}
       <button
         onClick={payWhitMercadoPago}
         className="bg-blue-500 text-white w-full h-full"

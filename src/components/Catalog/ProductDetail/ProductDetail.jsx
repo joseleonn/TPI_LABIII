@@ -4,30 +4,14 @@ import { getDoc, collection, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { CartUseContext } from "../../../context/CartContext";
 import { CheckIcon } from "@heroicons/react/24/outline";
+import useProductDetail from "./hooks/useProductDetail";
 
 const ProductDetail = () => {
-  const { productId } = useParams();
-  const [product, setProductInfo] = useState(null);
-  const { cart, setCart, addToCart } = CartUseContext();
+  const { addToCart } = CartUseContext();
   const [addCheck, setAddCheck] = useState(false);
 
-  //funcion para obetener informacion del producto especifio en la base de datos
-  const getProductById = async () => {
-    const collectionRef = collection(db, "Products");
-    const docuRef = doc(collectionRef, productId);
-    const snapDoc = await getDoc(docuRef);
-    const producto = snapDoc.data();
-    return producto;
-  };
-
-  useEffect(() => {
-    const getProduct = async () => {
-      const product = await getProductById(productId);
-      setProductInfo({ ...product, id: productId });
-      console.log(product);
-    };
-    getProduct();
-  }, [productId]);
+  //DESESTRUCTURAMOS PRODUCT DE ESTE CUSTOMHOOK
+  const { product } = useProductDetail();
 
   //CAMBIA EL ICONO DEL CARRITO A UN CHECK MEDIANMTE UN ESTADO
   const handlerAddCheck = () => {

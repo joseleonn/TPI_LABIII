@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CartUseContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import SumAndRestProduct from "./SumAndRestProduct";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import FormCheckout from "../Checkout/FormCheckout";
+import { ModeContext } from "../../context/DarkLightModeContext";
 const ShoppingCart = () => {
   const { cart, setCart } = CartUseContext();
-  const [deleteId, setDeleteId] = useState();
+  const { mode } = useContext(ModeContext);
 
   const cartTotal = cart.reduce(
     (acc, element) => acc + parseInt(element.precio) * element.quanty,
@@ -25,12 +26,10 @@ const ShoppingCart = () => {
   return (
     <div>
       <section>
-        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 shadow-xl shadow-black">
+        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 shadow-xl ">
           <div className="mx-auto max-w-3xl mt-16">
             <header className="text-center">
-              <h1 className="text-xl font-bold text-white sm:text-3xl">
-                Tu Carrito
-              </h1>
+              <h1 className="text-xl font-bold  sm:text-3xl">Tu Carrito</h1>
             </header>
             {cart.length > 0 ? (
               <>
@@ -90,7 +89,11 @@ const ShoppingCart = () => {
                   <div className="mt-8 flex justify-end border-t border-gray-100 pt-8">
                     <div className="w-screen max-w-lg space-y-4">
                       <dl className="space-y-0.5 text-sm text-gray-700">
-                        <div className="flex justify-between text-2xl font-medium text-white ">
+                        <div
+                          className={`flex justify-between text-2xl font-medium ${
+                            mode === "light" ? "text-gray-800" : "text-white"
+                          }`}
+                        >
                           <dt>Total</dt>
                           <dd>$ {cartTotal}</dd>
                         </div>

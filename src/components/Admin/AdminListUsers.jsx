@@ -1,53 +1,14 @@
-import React from "react";
-import { TrashIcon } from "@heroicons/react/24/outline";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  getFirestore,
-} from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { UserAuth } from "../../context/AuthContext";
-import app from "../../firebase/Credentials";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import AdminModifyModalUser from "./AdminModifyModalUser";
+import useListUsers from "./hooks/useListUsers";
 
 const AdminListUsers = () => {
-  // LLAMADA DE TODOS LOS PRODUCTOS A LA BASE DE DATOS
-  const [data, setData] = useState([]);
-  const { categoriaId } = useParams();
-  //   const [deletedProductId, setDeletedProductId] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectedUserEmail, setSelectedUserEmail] = useState("");
 
-  useEffect(() => {
-    const querydb = getFirestore();
-    const users = collection(querydb, "Usuarios");
-
-    getDocs(users).then((res) =>
-      setData(
-        res.docs.map((user) => ({
-          id: user.id,
-          ...user.data(),
-        }))
-      )
-    );
-  }, []);
-
-  //   FUNCION PARA REMOVER UN PRODUCTO DE LA BASE DE DATOS
-  //   const firestore = getFirestore(app);
-
-  //   const deleteProductHandle = async (id) => {
-  //     try {
-  //       const productRef = doc(firestore, `Usuarios/${id}`);
-  //       await deleteDoc(productRef);
-  //       console.log("Datos eliminados correctamente");
-  //       setDeletedProductId(id); // Actualiza el estado deletedProductId
-  //     } catch (error) {
-  //       console.error("Error al eliminar los datos:", error);
-  //     }
-  //   };
+  //DESESTRUCTURAMOS EL DATA QUE VIENE DE UN CUSTOMHOOK QUE TRAE LA LISTA DE USUARIOS.
+  const { data } = useListUsers();
 
   const selectUser = (userId) => {
     setSelectedUserId(userId);

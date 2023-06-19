@@ -1,12 +1,8 @@
-import { Link } from "react-router-dom";
 import { useState, Fragment } from "react";
 import "firebase/auth";
 import { UserAuth } from "../../context/AuthContext";
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  UserCircleIcon,
-  ArrowLeftOnRectangleIcon,
-} from "@heroicons/react/24/outline";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 const UserModal = () => {
   const [open, setOpen] = useState(false);
 

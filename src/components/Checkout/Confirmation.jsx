@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { CartUseContext } from "../../context/CartContext";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+//link a la api de firabase
 let functionPagarMP =
   "https://us-central1-tpilab33.cloudfunctions.net/crearPagoMP";
 
@@ -12,7 +14,7 @@ const Confirmation = () => {
   const [succesBuy, setSuccesBuy] = useState("esperando");
 
   const { user } = UserAuth();
-  const { cart, getCartItems, deleteCartDB } = CartUseContext();
+  const { getCartItems, deleteCartDB } = CartUseContext();
   const [idClient, setIdClient] = useState(null);
 
   const messageSuccess = () => {
@@ -65,7 +67,7 @@ const Confirmation = () => {
           cartDB: cartDB,
         };
         console.log(order);
-        if (order.cartDB && order.cartDB.length > 0 && cartDB ) {
+        if (order.cartDB && order.cartDB.length > 0 && cartDB) {
           axios
             .post(functionPagarMP, JSON.stringify(order), {
               headers: {
