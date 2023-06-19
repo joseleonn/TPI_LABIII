@@ -1,5 +1,8 @@
 import { Typewriter } from "react-simple-typewriter";
 import { Link } from "react-router-dom";
+import { ModeContext } from "../../context/DarkLightModeContext";
+import { useContext } from "react";
+
 const navigation = {
   solutions: [
     { name: "Marketing", href: "#" },
@@ -85,9 +88,11 @@ const navigation = {
   ],
 };
 function HeaderAboutUs() {
+  const { mode } = useContext(ModeContext);
+
   return (
     <main>
-      <div className="relative px-6 lg:px-8 text-white h-screen">
+      <div className="relative px-6 lg:px-8  h-screen">
         <div className="mx-auto max-w-full xl:mx-12 xl:pt-32 xl:pb-40 lg:pt-40 lg:pb-40 pt-24 pb-12 ">
           <div>
             <div className="">
@@ -100,7 +105,9 @@ function HeaderAboutUs() {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-gray-400 hover:text-gray-200"
+                    className={`hover:text-gray-200 ${
+                      mode === "light" ? "text-gray-800 " : "text-gray-400 "
+                    }`}
                   >
                     <span className="sr-only">{item.name}</span>
                     <item.icon className="h-8 w-8" aria-hidden="true" />
@@ -111,9 +118,9 @@ function HeaderAboutUs() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center text-justify pt-20 text-white ">
+      <div className="flex flex-col items-center text-justify pt-20  ">
         <h1 className=" font-bold">Indumentaria21</h1>
-        <p className="mt-10 text-xl leading-8 text-gray-200 max-w-5xl m-8 ">
+        <p className="mt-10 text-xl leading-8  max-w-5xl m-8 ">
           Somos una empresa de ropa con sede en la hermosa ciudad de Rosario.
           Nos enorgullece ser una empresa pequeña y local que se dedica a
           ofrecer prendas de alta calidad y estilo a nuestros clientes. En

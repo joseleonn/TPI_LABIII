@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, Fragment, useEffect } from "react";
+import { useState, Fragment, useEffect, useContext } from "react";
 import "firebase/auth";
 import { UserAuth } from "../../context/AuthContext";
 import { Dialog, Transition } from "@headlessui/react";
@@ -15,6 +15,7 @@ import { CartUseContext } from "../../context/CartContext";
 import NavBarMobile from "./NavBarMobile";
 import ModalLogOut from "./ModalLogOut";
 import ButtonDarkLightMode from "../ButtonDarkLightMode/ButtonDarkLightMode";
+import { ModeContext } from "../../context/DarkLightModeContext";
 
 const navLinks = [
   {
@@ -39,6 +40,7 @@ const NavBar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { itemsQuanty, cart } = CartUseContext();
+  const { mode } = useContext(ModeContext);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -68,29 +70,39 @@ const NavBar = () => {
     };
   }, []);
   return (
-    <>
+    <div className="text-white">
       <header aria-label="Site Header" className="bg-transparent ">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8  ">
           <div
-            className={`flex h-16 items-center justify-between fixed inset-0 z-10  ${
+            className={`flex h-16 items-center justify-between fixed inset-0 z-10 ${
               scrolled
-                ? "bg-black bg-opacity-90 shadow-md transition ease-in-out delay-200"
+                ? mode === "dark"
+                  ? "bg-black bg-opacity-90 shadow-md"
+                  : "bg-white bg-opacity-90 shadow-md"
                 : "bg-transparent"
-            }`}
+            } `}
           >
             <div className="md:flex  p-8 ">
-              <Link className="block text-teal-600" to="/">
-                <p className="font-bold text-white ">INDUMENTARIA 21</p>
+              <Link className="block " to="/">
+                <p
+                  className={`${
+                    mode === "light" ? "text-gray-800" : "text-white"
+                  }`}
+                >
+                  INDUMENTARIA 21
+                </p>
               </Link>
             </div>
 
-            <div className="hidden md:block ">
+            <div className="hidden md:block  ">
               <nav aria-label="Site Nav">
-                <ul className="flex items-center gap-12 text-l ">
+                <ul className="flex items-center gap-12 text-l  ">
                   {navLinks.map((navlink) => (
                     <li key={navlink.id}>
                       <Link
-                        className="text-white transition hover:text-gray-500/75"
+                        className={`hover:text-gray-600 ${
+                          mode === "light" ? "text-gray-800" : "text-white"
+                        }`}
                         to={navlink.to}
                       >
                         {navlink.name}
@@ -101,7 +113,9 @@ const NavBar = () => {
                   {user ? (
                     <li>
                       <Link
-                        className="text-white transition hover:text-gray-500/75"
+                        className={`hover:text-gray-600 ${
+                          mode === "light" ? "text-gray-800" : "text-white"
+                        }`}
                         to="/miscompras"
                       >
                         Mis Compras
@@ -111,26 +125,28 @@ const NavBar = () => {
                   {user && user.rol === "Admin" ? (
                     <li className={`${showAdminMenu ? "relative " : ""} `}>
                       <Link
-                        className="text-white transition hover:text-gray-500/75 focus:outline-none"
+                        className={`hover:text-gray-600 ${
+                          mode === "light" ? "text-gray-800" : "text-white"
+                        }`}
                         onClick={toggleAdminMenu}
                       >
                         Admin
                       </Link>
                       {showAdminMenu ? (
-                        <ul className="text-white bg-gray-700 rounded-md pt-2 absolute right-0 ">
+                        <ul className=" bg-gray-700 rounded-md pt-2 absolute right-0 ">
                           <Link
                             to="/admin/usuarios"
-                            className="text-white transition hover:text-white focus: outline-none"
+                            className=" transition hover: focus: outline-none"
                           >
-                            <li className="p-2 transition-colors duration-300 ease-in-out  hover:text-gray-400">
+                            <li className="text-white p-2 transition-colors duration-300 ease-in-out  hover:text-gray-400">
                               Usuarios
                             </li>
                           </Link>
                           <Link
                             to="/admin/productos"
-                            className="text-white transition hover:text-white focus: outline-none"
+                            className=" transition hover: focus: outline-none"
                           >
-                            <li className="p-2  transition-colors duration-300 ease-in-out hover:text-gray-400">
+                            <li className="text-white p-2  transition-colors duration-300 ease-in-out hover:text-gray-400">
                               Productos
                             </li>
                           </Link>
@@ -146,22 +162,28 @@ const NavBar = () => {
 
             <div className="flex items-center gap-4 hidden md:block p-8">
               {user ? (
-                <div className="sm:flex sm:gap-4">
+                <div
+                  className={`sm:flex sm:gap-4 ${
+                    mode === "light" ? "text-gray-800" : "text-white"
+                  }`}
+                >
                   <div>
                     <UserModal />
                   </div>
 
                   <Link
-                    className="mt-3 mr-2 text-white hover:text-gray-300 "
+                    className={`" mt-3 mr-2 hover:text-gray-700  ${
+                      mode === "light" ? "text-gray-800" : "text-white"
+                    }`}
                     to="/carrito"
                   >
                     <ShoppingCartIcon className="h-8 w-8" />
                     {cart.length > 0 ? <TotalItems /> : null}
                   </Link>
-                  <ButtonDarkLightMode />
+                  <ButtonDarkLightMode className="" />
 
                   <Link
-                    className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow hover:text-red-900"
+                    className="rounded-md text-white bg-red-600 px-5 py-2.5 text-sm font-medium  shadow hover:text-red-900"
                     onClick={(e) => setOpen(true)}
                   >
                     <ArrowLeftOnRectangleIcon className="h-8 w-8" />
@@ -169,7 +191,7 @@ const NavBar = () => {
                 </div>
               ) : (
                 // IF NOT LOGIN
-                <div className="sm:flex sm:gap-4">
+                <div className="sm:flex sm:gap-4 h-full items-center">
                   <Link
                     className="rounded-md  px-5 py-2.5 text-l font-medium text-gray-800 bg-gray-300 bg-opacity-50 shadow transition hover:text-gray-100/75"
                     to="/login"
@@ -179,28 +201,34 @@ const NavBar = () => {
 
                   <div className="hidden sm:flex">
                     <Link
-                      className="rounded-md  px-5 py-2.5 text-l font-medium text-white bg-gray-700 bg-opacity-50 shadow transition hover:text-gray-500/75"
+                      className="rounded-md  text-gray-200 px-5 py-2.5 text-l font-medium  bg-gray-700 bg-opacity-50 shadow transition hover:text-gray-500/75"
                       to="/register"
                     >
                       Registerse
                     </Link>
                   </div>
-                  <Link className=" mr-2 text-white " to="/carrito">
-                    <ShoppingCartIcon className="h-8 w-8 hover:text-gray-600" />
+                  <Link className=" mr-2  " to="/carrito">
+                    <ShoppingCartIcon
+                      className={`h-8 w-8 hover:text-gray-600  ${
+                        mode === "light" ? "text-gray-800" : "text-white"
+                      }`}
+                    />
                     {cart.length > 0 ? <TotalItems /> : null}
                   </Link>
 
-                  <ButtonDarkLightMode />
+                  <ButtonDarkLightMode className="" />
                 </div>
               )}
             </div>
 
             <div className="block flex md:hidden">
               <Link
-                className=" mt-4 mr-2 text-white hover:text-white "
+                className={`" mt-4 mr-2  ${
+                  mode === "light" ? "text-gray-800" : "text-white"
+                }`}
                 to="/carrito"
               >
-                <ShoppingCartIcon className="h-8 w-8 transition-colors duration-300 ease-in-out hover:text-gray-400" />
+                <ShoppingCartIcon className="h-8 w-8 hover:text-gray-400" />
                 {cart.length > 0 ? <TotalItems /> : null}
               </Link>
               <div className="flex justify-center items-center -mr-5">
@@ -211,18 +239,22 @@ const NavBar = () => {
                 <>
                   <button
                     onClick={toggleMenu}
-                    className="rounded bg-transparent p-4 text-gray-600 transition mr-4 focus:outline-none m-2 hover:border-transparent"
+                    className={`rounded bg-transparent p-4   mr-4 focus:outline-none m-2 hover:border-transparent ${
+                      mode === "light" ? "text-gray-800" : "text-white"
+                    }`}
                   >
-                    <XMarkIcon className="h-6 w-6 text-white transition-colors duration-300 ease-in-out hover:text-gray-400" />
+                    <XMarkIcon className="h-6 w-6  hover:text-gray-400" />
                   </button>
                 </>
               ) : (
                 <>
                   <button
                     onClick={toggleMenu}
-                    className="rounded bg-transparent p-4 text-gray-600 transition mr-4 focus:outline-none m-2 hover:border-transparent"
+                    className={`rounded bg-transparent p-4   mr-4 focus:outline-none m-2 hover:border-transparent ${
+                      mode === "light" ? "text-gray-800" : "text-white"
+                    }`}
                   >
-                    <Bars3Icon className="h-6 w-6 text-white transition-colors duration-300 ease-in-out hover:text-gray-400" />
+                    <Bars3Icon className="h-6 w-6  hover:text-gray-400" />
                   </button>
                 </>
               )}
@@ -242,7 +274,7 @@ const NavBar = () => {
       </header>
       {/* modal logout */}
       <ModalLogOut setOpen={setOpen} logout={logout} open={open} />
-    </>
+    </div>
   );
 };
 

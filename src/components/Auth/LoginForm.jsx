@@ -6,6 +6,7 @@ import { Typewriter } from "react-simple-typewriter";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Alerts from "./Alerts";
 import { LoadingContext } from "../../context/LoadingContext";
+import { ModeContext } from "../../context/DarkLightModeContext";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { user, handleSingIn, ResetPassword } = UserAuth();
   const { toggleLoading } = useContext(LoadingContext);
+  const { mode } = useContext(ModeContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +55,11 @@ const LoginForm = () => {
             aria-label="Main"
             className="  px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-  "
           >
-            <div className=" max-w-xl lg:max-w-3xl bg-gray-600 bg-opacity-50 p-10 rounded-3xl mt-14 ">
+            <div
+              className={` max-w-xl lg:max-w-3xl  bg-opacity-50 p-10 rounded-3xl mt-14 ${
+                mode === "light" ? "bg-black" : "bg-gray-600"
+              }`}
+            >
               <div className="relative  block ">
                 <h1 className=" text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl flex justify-center">
                   <UserCircleIcon
@@ -112,7 +118,7 @@ const LoginForm = () => {
                     Iniciar Sesion
                   </button>
 
-                  <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                  <p className="mt-4 text-sm text-gray-200 sm:mt-0">
                     Ya tienes una cuenta?
                     <Link
                       to="/register"
@@ -122,7 +128,7 @@ const LoginForm = () => {
                     </Link>
                     .
                   </p>
-                  <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                  <p className="mt-4 text-sm text-gray-200 sm:mt-0">
                     Olvidaste tu contraseña?
                     <Link
                       className="text-gray-200 underline pl-2"

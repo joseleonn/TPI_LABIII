@@ -12,7 +12,7 @@ function App() {
   const { mode } = useContext(ModeContext);
   const { isloading } = useContext(LoadingContext);
   return (
-    <div className={`${mode === "light" && "light-theme"}`}>
+    <div className={`${mode === "light" ? "light-theme" : "dark-theme"}`}>
       {isloading && <LoadingSpinner />}
       <RoutesPath />
     </div>

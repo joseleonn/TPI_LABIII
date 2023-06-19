@@ -5,9 +5,11 @@ const ButtonDarkLightMode = () => {
   const { mode, modeHandler } = useContext(ModeContext);
 
   return (
-    <div>
+    <div className="mt-2">
       <button
-        className="bg-transparent text-white border-none focus:outline-none"
+        className={`bg-transparent focus:outline-none border-none ${
+          mode === "light" ? "text-gray-800" : "text-white"
+        }`}
         onClick={modeHandler}
       >
         {mode === "dark" ? (

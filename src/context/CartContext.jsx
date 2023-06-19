@@ -198,7 +198,6 @@ export const CartContextProvider = ({ children }) => {
           return [];
         }
       } else {
-        console.error("idClient no está definido");
         return [];
       }
     };

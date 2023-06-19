@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CartUseContext } from "../../../context/CartContext";
 import { CheckIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
+import Filter from "../../Filters/Filter";
 
 const ProductList = () => {
   //TRAEMOS LOS PRODUCTOS DESDE CONTEXT
   const { data, addToCart } = CartUseContext();
   const [addCheckMap, setAddCheckMap] = useState(false);
+  const [categ, setCateg] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   //CAMBIA EL ICONO DEL CARRITO A UN CHECK MEDIANMTE UN ESTADO
   const handlerAddCheck = (productId) => {
@@ -25,19 +28,46 @@ const ProductList = () => {
     }, 1000); // Delay de 1 segundo (1000 milisegundos)
   };
 
+  //funcion para trarerme categ
+  const categFunc = (categoria) => {
+    setCateg(categoria);
+  };
+
+  //funcion para filtrar por categoria
+
+  useEffect(() => {
+    if (categ !== "") {
+      if (categ === "todos") {
+        setFilteredProducts(data);
+      } else {
+        const filter = data.filter((producto) => producto.categoria === categ);
+        setFilteredProducts(filter);
+      }
+    } else {
+      setFilteredProducts(data);
+    }
+  }, [data, categ]);
+
   return (
-    <div>
+    <div className="">
       <section>
         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <header className="mt-16">
-            <h2 className="text-xl font-bold text-white sm:text-3xl flex justify-center">
+            <h2 className="text-xl font-bold  sm:text-3xl flex justify-center">
               Productos
             </h2>
           </header>
 
           <ul className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-4 ">
-            {data.map((product) => (
-              <li className="shadow-xl shadow-black" key={product.id}>
+            <Filter categFunc={categFunc} />
+
+            {filteredProducts.length === 0 && (
+              <p className=" text-xl text-center">
+                No hay productos disponibles.
+              </p>
+            )}
+            {filteredProducts.map((product) => (
+              <li className="shadow-xl  " key={product.id}>
                 <Link
                   to={`/detalleproducto/${product.id}`}
                   className="block overflow-hidden group rounded-md "
