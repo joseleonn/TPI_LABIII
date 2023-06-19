@@ -51,10 +51,11 @@ const RegisterFormFire = () => {
     e.preventDefault();
     toggleLoading(true);
     if (password === repassword) {
-      messageSuccess();
       createUserWithEmailAndPassword(auth, email, password, rol)
         .then((userCredential) => {
           // Signed in
+          messageSuccess();
+
           const user = userCredential.user;
 
           // Agrega al usuario a la BASE DE DATOS y le asigna el rol
