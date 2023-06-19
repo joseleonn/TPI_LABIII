@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useContext } from "react";
 import "firebase/auth";
 import { UserAuth } from "../../context/AuthContext";
 import { Dialog, Transition } from "@headlessui/react";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import app from "../../firebase/Credentials";
+import { ToastContainer, toast } from "react-toastify";
+import { LoadingContext } from "../../context/LoadingContext";
 
 const AdminModifyModalUser = ({ userId, userEmail }) => {
   const [open, setOpen] = useState(false);
@@ -13,7 +15,33 @@ const AdminModifyModalUser = ({ userId, userEmail }) => {
   const firestore = getFirestore(app);
   const storage = getStorage(app);
   const navigate = useNavigate("");
+  const { toggleLoading } = useContext(LoadingContext);
 
+  const messageError = () => {
+    toast.error("Error al actualizar los datos!", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  const messageSuccess = () => {
+    toast.success("Datos Actualizados!", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
   //TOMAMOS LOS DATOS DE DATA
   const [data, setData] = useState({
     id: "",
@@ -48,19 +76,27 @@ const AdminModifyModalUser = ({ userId, userEmail }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(data);
+    toggleLoading(true);
 
     try {
       await updateData(data); // Utiliza la función de actualización en lugar de la de creación
       console.log("Datos actualizados correctamente");
       navigate("/admin/usuarios");
+      toggleLoading(false);
+      messageSuccess();
+      setOpen(false);
     } catch (error) {
       console.error("Error al actualizar los datos:", error);
+      toggleLoading(false);
+      messageError();
     }
     // ...
   };
 
   return (
     <div>
+      <ToastContainer />
+
       <div className="" onClick={(e) => setOpen(true)}>
         <p className="hover:text-gray-500/75">Modificar rol</p>
       </div>

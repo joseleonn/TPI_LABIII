@@ -8,15 +8,17 @@ import {
   getFirestore,
 } from "firebase/firestore";
 import app from "../../firebase/Credentials";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import NavBar from "../navigation/NavBar";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { LoadingContext } from "../../context/LoadingContext";
 
 const AdminManagment = () => {
   const { user } = UserAuth();
   const navigate = useNavigate();
   const firestore = getFirestore(app);
   const storage = getStorage(app);
+  const { toggleLoading } = useContext(LoadingContext);
 
   const [data, setData] = useState({
     nombre: "",
@@ -52,14 +54,17 @@ const AdminManagment = () => {
 
   //FUNCION PARA ENVIAR LOS DATOS
   const handleSubmit = async (e) => {
+    toggleLoading(true);
     e.preventDefault();
     console.log(data);
 
     try {
       await addData(data);
       console.log("Datos agregados correctamente");
+      toggleLoading(false);
       navigate("/admin/productos");
     } catch (error) {
+      toggleLoading(false);
       console.error("Error al agregar los datos:", error);
     }
   };
@@ -100,12 +105,12 @@ const AdminManagment = () => {
         >
           <div>
             <div className="relative">
-              <p className="text-gray-400 m-2">Nombre del producto</p>
+              <p className=" m-2">Nombre del producto</p>
               <input
                 required
                 type="text"
                 name="nombre"
-                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm text-black"
                 placeholder="Ingrese el nombre"
                 value={data.nombre}
                 onChange={handleChange}
@@ -115,10 +120,10 @@ const AdminManagment = () => {
 
           <div>
             <div className="relative">
-              <p className="text-gray-400 m-2">Categoria</p>
+              <p className=" m-2">Categoria</p>
 
               <select
-                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm text-black"
                 placeholder="Seleccione una categoria"
                 name="categoria"
                 required
@@ -137,9 +142,9 @@ const AdminManagment = () => {
 
           <div>
             <div className="relative">
-              <p className="text-gray-400 m-2">Descripcion</p>
+              <p className=" m-2">Descripcion</p>
               <input
-                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm text-black"
                 placeholder="Ingrese una descripcion"
                 required
                 name="descripcion"
@@ -151,10 +156,10 @@ const AdminManagment = () => {
 
           <div>
             <div className="relative">
-              <p className="text-gray-400 m-2">Precio</p>
+              <p className=" m-2">Precio</p>
               <input
                 type="number"
-                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm text-black"
                 placeholder="Ingrese el precio"
                 required
                 name="precio"
@@ -166,9 +171,9 @@ const AdminManagment = () => {
 
           <div>
             <div className="relative">
-              <p className="text-gray-400 m-2">Stock</p>
+              <p className=" m-2">Stock</p>
               <input
-                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm text-black"
                 placeholder="Ingrese el stock del producto"
                 required
                 type="number"
@@ -181,10 +186,10 @@ const AdminManagment = () => {
 
           <div>
             <div className="relative">
-              <p className="text-gray-400 m-2">Imagen</p>
+              <p className=" m-2">Imagen</p>
               <input
                 type="file"
-                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm text-black bg-white"
                 placeholder="Ingrese la imagen"
                 name="url"
                 onChange={fileHandler}

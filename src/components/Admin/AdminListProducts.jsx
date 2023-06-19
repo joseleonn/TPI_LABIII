@@ -28,11 +28,11 @@ const AdminListProducts = () => {
       <section>
         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <header className="mt-16">
-            <h2 className="text-xl font-bold text-white sm:text-3xl flex justify-center">
+            <h2 className="text-xl font-bold  sm:text-3xl flex justify-center">
               Productos
             </h2>
             <Link to="/agregarproducto">
-              <button className="bg-gray-700 border border-gray-800 shadow-md text-sm mt-4 text-white hover:text-gray-600 hover:border-gray-600 focus:outline-none">
+              <button className="text-white bg-gray-700 border border-gray-800 shadow-md text-sm mt-4  hover:text-gray-600 hover:border-gray-600 focus:outline-none">
                 Agregar Producto
               </button>
             </Link>
@@ -54,22 +54,22 @@ const AdminListProducts = () => {
                   </div>
 
                   <div className="relative pt-3 bg-gray-700 p-1">
-                    <h3 className="text-xl text-white">{product.nombre}</h3>
+                    <h3 className="text-xl text-white ">{product.nombre}</h3>
 
-                    <span className="tracking-wider text-white text-xl">
+                    <span className="tracking-wider text-white  text-xl">
                       $ {product.precio}
                     </span>
                     <div className="mt-6">
                       <span className="flex justify-end  -mb-11 ">
                         <TrashIcon
                           onClick={() => deleteProductHandle(product.id)}
-                          className="h-8 w-8 text-white bg-red-600 rounded-md p-1"
+                          className="h-8 w-8  bg-red-600 rounded-md p-1 text-white"
                         />
                       </span>
 
                       <span className="flex -mt-6 ">
                         <button
-                          className="bg-transparent shadow-xl border border-white text-sm mt-2 mb-2 text-white hover:text-gray-600 hover:border-gray-600 focus:outline-none"
+                          className="text-white bg-transparent shadow-xl border border-white text-sm mt-2 mb-2  hover:text-gray-600 hover:border-gray-600 focus:outline-none"
                           onClick={() => selectProduct(product.id)}
                         >
                           <AdminModifyModal productId={selectedProductId} />

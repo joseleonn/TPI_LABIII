@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, Fragment, useEffect } from "react";
+import { useState, Fragment, useEffect, useContext } from "react";
 import "firebase/auth";
 import { UserAuth } from "../../context/AuthContext";
 import { Dialog, Transition } from "@headlessui/react";
@@ -9,6 +9,8 @@ import app from "../../firebase/Credentials";
 import { CartUseContext } from "../../context/CartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { LoadingContext } from "../../context/LoadingContext";
+import { ToastContainer } from "react-toastify";
 
 const AdminModifyModal = ({ productId }) => {
   const [open, setOpen] = useState(false);
@@ -19,6 +21,8 @@ const AdminModifyModal = ({ productId }) => {
   const { data } = CartUseContext();
   const [urlLoaded, setUrlLoaded] = useState(false);
   const [fileload, setFileLoading] = useState(false);
+  const { toggleLoading } = useContext(LoadingContext);
+
   //TOMAMOS LOS DATOS DE DATA
   const [newData, setData] = useState({
     id: productId,
@@ -63,14 +67,17 @@ const AdminModifyModal = ({ productId }) => {
 
   //FUNCIO PARA ENVIAR LOS DATOS
   const handleSubmit = async (e) => {
+    toggleLoading(true);
     e.preventDefault();
 
     try {
       await updateData(newData); // Utiliza la función de actualización en lugar de la de creación
       console.log("Datos actualizados correctamente");
+      toggleLoading(false);
       setOpen(false);
       navigate("/admin/productos");
     } catch (error) {
+      toggleLoading(false);
       console.error("Error al actualizar los datos:", error);
     }
   };
