@@ -57,7 +57,7 @@ const NavBar = () => {
 
   return (
     <div className="text-white">
-      <header aria-label="Site Header" className="bg-transparent ">
+      <header aria-label="Site Header" className=" ">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8  ">
           <div
             className={`flex h-16 items-center justify-between fixed inset-0 z-10 ${
@@ -65,6 +65,8 @@ const NavBar = () => {
                 ? mode === "dark"
                   ? "bg-black bg-opacity-90 shadow-md"
                   : "bg-white bg-opacity-90 shadow-md"
+                : mode === "light"
+                ? "bg-white"
                 : "bg-transparent"
             } `}
           >
