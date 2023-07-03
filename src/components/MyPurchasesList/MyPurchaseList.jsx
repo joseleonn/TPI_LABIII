@@ -8,7 +8,7 @@ const MyPurchaseList = () => {
       <h1 className="text-center p-6 text-white">Mis Compras</h1>
       <div className=" w-full">
         <ul className="flex flex-wrap  justify-center m-10 ">
-          {pedidosData ? (
+          {pedidosData && pedidosData.length > 0 ? (
             <div className="  min-w-full ">
               {pedidosData.map((pedido) => (
                 <li key={pedido.id} className=" w-full text-xl">
